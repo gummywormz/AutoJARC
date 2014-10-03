@@ -26,7 +26,6 @@ public class ExtensionGenerator {
      * Path separator
      */
     public static final String sep = File.separator;
-    //keys for the different apps
     /**
      * Creates a new extension generator object
      * @param pkgName The name of the package
