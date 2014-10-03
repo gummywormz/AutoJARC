@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2014 homecomputer.
+ * Copyright 2014 Paul Alves.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -43,6 +43,11 @@ public class DirectoryVerifier {
     f = pFile;
     }
     
+    /**
+     *
+     * Verifies the file
+     * @return A VerifierFlag with the status of the verification
+     */
     public VerifierFlag verify(){
     if(!f.isDirectory()){return new VerifierFlag(false,VerifierFlag.FAILURE_INVALID_OR_CORRUPTED_PROJECT);}   
     File bin = new File(f.getAbsolutePath() + ExtensionGenerator.sep + "bin");
