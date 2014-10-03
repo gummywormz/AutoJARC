@@ -51,7 +51,7 @@ public class DirectoryVerifier {
     public VerifierFlag verify(){
     if(!f.isDirectory()){return new VerifierFlag(false,VerifierFlag.FAILURE_INVALID_OR_CORRUPTED_PROJECT);}   
     File bin = new File(f.getAbsolutePath() + ExtensionGenerator.sep + "bin");
-    if(!bin.exists()){return new VerifierFlag(false,VerifierFlag.FAILURE_INVALID_OR_CORRUPTED_PROJECT);}
+    if(!bin.exists()){return new VerifierFlag(false,VerifierFlag.FAILURE_NO_PROJECT_FOUND);}
     String[] apk = bin.list();
     boolean found = false;
     for(String a : apk){
