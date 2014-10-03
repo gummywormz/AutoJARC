@@ -46,10 +46,10 @@ public class ExtensionGenerator {
      */
     public void generate(File path){
         //gets the resource files.
-        InputStream locales = ExtensionGenerator.class.getClassLoader().getResourceAsStream("jarc/res/_locales/en/messages.json");
-        InputStream htmlPage = ExtensionGenerator.class.getClassLoader().getResourceAsStream("jarc/res/app_main.html");
-        InputStream icon = ExtensionGenerator.class.getClassLoader().getResourceAsStream("jarc/res/icon.png");
-        InputStream manifest = ExtensionGenerator.class.getClassLoader().getResourceAsStream("jarc/res/manifest.json");
+        InputStream locales = ExtensionGenerator.class.getClassLoader().getResourceAsStream("com/github/gummywormz/AutoJARC/res/_locales/en/messages.json");
+        InputStream htmlPage = ExtensionGenerator.class.getClassLoader().getResourceAsStream("com/github/gummywormz/AutoJARC/res/app_main.html");
+        InputStream icon = ExtensionGenerator.class.getClassLoader().getResourceAsStream("com/github/gummywormz/AutoJARC/res/icon.png");
+        InputStream manifest = ExtensionGenerator.class.getClassLoader().getResourceAsStream("com/github/gummywormz/AutoJARC/res/manifest.json");
 
         String absPath = path.getAbsolutePath(); // get the full path to write
         try{
