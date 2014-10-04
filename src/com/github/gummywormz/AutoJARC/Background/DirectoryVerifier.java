@@ -50,6 +50,7 @@ public class DirectoryVerifier {
      */
     public VerifierFlag verify(){
     if(!f.isDirectory()){return new VerifierFlag(false,VerifierFlag.FAILURE_INVALID_OR_CORRUPTED_PROJECT);}   
+    //if(AutoJARCUI.getIgnoreList.isIgnored(f.getName())){return new VerifierFlag(false,VerifierFlag.FAILURE_IGNORED_DIRECTORY);}
     File bin = new File(f.getAbsolutePath() + ExtensionGenerator.sep + "bin");
     if(!bin.exists()){return new VerifierFlag(false,VerifierFlag.FAILURE_NO_PROJECT_FOUND);}
     String[] apk = bin.list();

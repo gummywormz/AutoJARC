@@ -37,6 +37,11 @@ public class VerifierFlag {
      */
     public static final int SUCCESS = 4;
     
+    /**
+     * The verification failed because the project is on the ignore list
+     */
+    public static final int FAILURE_IGNORED_DIRECTORY = 5;
+    
     private final boolean didSucceed;
     private final int why;
     
@@ -77,6 +82,7 @@ public class VerifierFlag {
     if(why == 2){return "FAILURE_INVALID_OR_CORRUPTED_PROJECT";}
     if(why == 3){return "FAILURE_IO_ERROR";}
     if(why == 4){return "SUCCESS";}
+    if(why == 5){return "FAILURE_IGNORED_DIRECTORY";}
     return null;
     }
     
@@ -90,6 +96,7 @@ public class VerifierFlag {
     if(why == 2){return "A key component of the project was not found. Please try rebuilding and / or cleaning.";}
     if(why == 3){return "Unable to access one or more elements of the project. Please check that you have appropriate permissions to access the files.";}
     if(why == 4){return "Verification succeeded.";}
+    if(why == 5){return "The project is on the ignore list. You can open AutoJARC.ignore to remove it.";}
     return null;
     }
     

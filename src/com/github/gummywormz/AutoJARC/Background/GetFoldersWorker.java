@@ -19,7 +19,7 @@ public class GetFoldersWorker extends javax.swing.SwingWorker<ArrayList<File>, S
     
     @Override
     protected ArrayList<File> doInBackground() throws Exception {
-        File dir = new File("workspacedir"); //Configuration.getConfig().getWorkspace();
+        File dir = new File("workspacedir"); //AutoJARCUI.getConfig().getWorkspace(); (full path btw)
         String[] subDirs = dir.list();
         ArrayList<File> realSubDirs = new ArrayList<>();
         for(String f : subDirs){
