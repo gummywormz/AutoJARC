@@ -7,10 +7,10 @@
    "arc_metadata": {
       "apkList": [ "__apkname__" ],
       "enableExternalDirectory": false,
-      "formFactor": "__form__",
+      "formFactor": "phone",
       "name": "__PACKAGE__",
-      "enableAdb": "__ADB__",
-      "orientation": "__orientation__",
+      "enableAdb": true,
+      "orientation": "portrait",
       "packageName": "__PACKAGE__",
       "useGoogleContactsSyncAdapter": false,
       "usePlayServices": [ "gcm" ]

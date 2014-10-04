@@ -17,7 +17,6 @@ import java.util.List;
  */
 public class ExtensionGenerator {
 
-    private final boolean useADB;
     private final String appName;
     private final String pkg;
     private final File apkPath;
@@ -35,7 +34,6 @@ public class ExtensionGenerator {
     public ExtensionGenerator(String pkgName, File apk, String app){
         pkg = pkgName;
         apkPath = apk;
-        useADB = true;
         appName = app;
     }
 
@@ -108,10 +106,6 @@ public class ExtensionGenerator {
                 //replace name of application pkg where needed
                 if(line.contains("__PACKAGE__")){
                     rLines[j] = line.replace("__PACKAGE__",pkg);
-                }
-                //set up the adb stuff (convenience methods woo)
-                if(line.contains("enableAdb")){
-                    rLines[j] = line.replace("\"__ADB__\"",Boolean.toString(useADB));
                 }
                 //change app name
                 if(line.contains("__MSG_extName__")){
