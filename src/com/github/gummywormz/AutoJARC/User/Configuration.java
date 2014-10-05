@@ -34,15 +34,18 @@ public class Configuration {
     //also remember to add MAC OS stuffs (you should probably handle it on the config screen automatically rather than here though....)
     private String workspaceDir;
     private String chromePath;
+    private String extensionDir;
     
     /**
-     * Creates a new configuration object
+     * Creates a new configuration object NOTE: all paths are to be absolute
      * @param ws Directory to the user's workspace
      * @param cp Path to the Chrome executable (including the file itself)
+     * @param ed Path to the extension directory
      */
-    public Configuration(String ws, String cp){
+    public Configuration(String ws, String cp,String ed){
     workspaceDir = ws;
     chromePath = cp;
+    extensionDir = ed;
     }
     
     /**
@@ -62,6 +65,14 @@ public class Configuration {
     }
     
     /**
+     * Sets the extension directory
+     * @param path The extension directory to set.
+     */
+    public void setExtensionDirectory(String path){
+    extensionDir = path;
+    }
+    
+    /**
      * Returns this workspace as a String
      * @return this workspace as a String
      */
@@ -78,6 +89,14 @@ public class Configuration {
     }
     
     /**
+     * Returns the extension directory as a String
+     * @return the extension directory as a String
+     */
+    public String getExtensionDirectory(){
+    return extensionDir;
+    }
+    
+    /**
      * Returns the workspace directory as a File
      * @return the workspace directory as a File
      */
@@ -91,6 +110,14 @@ public class Configuration {
      */
     public File getChromePathAsFile(){
     return new File(chromePath);
+    }
+    
+    /**
+     * Returns the Extension Directory as a File
+     * @return the Extension Directory as a File
+     */
+    public File getExtensionDirAsFile(){
+    return new File(extensionDir);
     }
     
 }
