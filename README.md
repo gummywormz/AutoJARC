@@ -13,8 +13,8 @@ Status
 Done: 
 * Background directory worker and verifer is done (barring any bugs...).
 * ExtensionGenerator has been trimmed down to fit the project better
+* Configuration files stuff
 
 TO-DO:
 * Actual UI
-* Configuration files stuff
 * Putting everything together
