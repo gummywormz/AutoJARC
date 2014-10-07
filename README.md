@@ -16,5 +16,7 @@ Done:
 * Configuration files stuff
 
 TO-DO:
-* Actual UI
-* Putting everything together
+* Add a config file parser / writer
+* Add ignore list parser / writer
+* Add projects parser / writer
+* Add the actual scanner / launcher
