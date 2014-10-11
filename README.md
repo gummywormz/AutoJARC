@@ -14,9 +14,10 @@ Done:
 * Background directory worker and verifer is done (barring any bugs...).
 * ExtensionGenerator has been trimmed down to fit the project better
 * Configuration files stuff
+* Add a config file parser / writer
 
 TO-DO:
-* Add a config file parser / writer
+
 * Add ignore list parser / writer
 * Add projects parser / writer
 * Add the actual scanner / launcher
