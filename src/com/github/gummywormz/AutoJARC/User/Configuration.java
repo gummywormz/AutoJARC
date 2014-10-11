@@ -24,7 +24,10 @@
 
 package com.github.gummywormz.AutoJARC.User;
 
+import com.github.gummywormz.AutoJARC.JARC_APK.ExtensionGenerator;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 
 /**
  * Objective Representation of AutoJarc.conf 
@@ -118,6 +121,24 @@ public class Configuration {
      */
     public File getExtensionDirAsFile(){
     return new File(extensionDir);
+    }
+
+    /**
+     * Outputs this configuration as an autojarc.conf file
+     * @throws java.io.IOException 
+     */
+    public void output() throws java.io.IOException {
+        String curPath = System.getProperty("user.dir");
+        String[] lines = new String[3];
+        lines[0] = "WORKSPACE_PATH=" + this.getWorkSpace();
+        lines[1] = "CHROME_PATH=" + this.getChromePath();
+        lines[2] = "EXTENSION_DIRECTORY=" + this.getExtensionDirectory();
+        String sep = ExtensionGenerator.sep;
+        BufferedWriter w = new BufferedWriter(new FileWriter(curPath + sep + "autojarc.conf"));
+        for(String s : lines){
+            w.write(s + "\n");
+        }
+        w.close();
     }
     
 }

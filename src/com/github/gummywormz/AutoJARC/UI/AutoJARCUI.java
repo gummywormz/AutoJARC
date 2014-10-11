@@ -26,13 +26,12 @@ package com.github.gummywormz.AutoJARC.UI;
 
 import com.github.gummywormz.AutoJARC.JARC_APK.ExtensionGenerator;
 import com.github.gummywormz.AutoJARC.User.*;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JTextArea;
 
 /**
@@ -45,6 +44,7 @@ public class AutoJARCUI extends javax.swing.JFrame {
     private ArrayList<Project> projectList;
     private Configuration configuration;
     private IgnoreList ignoreList;
+    private final String sep = ExtensionGenerator.sep;
     
     /**
      * Creates new form AutoJARCUI
@@ -71,7 +71,7 @@ public class AutoJARCUI extends javax.swing.JFrame {
     }
     
     private void checkFiles() throws FileNotFoundException, IOException{
-    String sep = ExtensionGenerator.sep;
+
     File config = new File(workDir + sep + "autojarc.conf");
     File ignore = new File(workDir + sep + "autojarc.ignore");
     File projects = new File(workDir + sep + "autojarc.projects");
@@ -124,13 +124,13 @@ public class AutoJARCUI extends javax.swing.JFrame {
 
         configWindow = new javax.swing.JFrame();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        wsTextField = new javax.swing.JTextField();
+        extDirTextField = new javax.swing.JTextField();
+        chromeTextField = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        configOK = new javax.swing.JButton();
         workspaceBrowse = new javax.swing.JButton();
         extBrowse = new javax.swing.JButton();
         chromeBrowse = new javax.swing.JButton();
@@ -162,19 +162,45 @@ public class AutoJARCUI extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel4.setText("Configuration");
 
+        wsTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                wsTextFieldActionPerformed(evt);
+            }
+        });
+
         jLabel5.setText("Workspace Directory:");
 
         jLabel6.setText("Extension Directory:");
 
         jLabel7.setText("Chrome Executeable:");
 
-        jButton1.setText("OK");
+        configOK.setText("OK");
+        configOK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                configOKActionPerformed(evt);
+            }
+        });
 
         workspaceBrowse.setText("Browse");
+        workspaceBrowse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                workspaceBrowseActionPerformed(evt);
+            }
+        });
 
         extBrowse.setText("Browse");
+        extBrowse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                extBrowseActionPerformed(evt);
+            }
+        });
 
         chromeBrowse.setText("Browse");
+        chromeBrowse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chromeBrowseActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout configWindowLayout = new javax.swing.GroupLayout(configWindow.getContentPane());
         configWindow.getContentPane().setLayout(configWindowLayout);
@@ -185,7 +211,7 @@ public class AutoJARCUI extends javax.swing.JFrame {
                 .addGroup(configWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, configWindowLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1))
+                        .addComponent(configOK))
                     .addGroup(configWindowLayout.createSequentialGroup()
                         .addGroup(configWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
@@ -193,9 +219,9 @@ public class AutoJARCUI extends javax.swing.JFrame {
                             .addComponent(jLabel7))
                         .addGap(18, 18, 18)
                         .addGroup(configWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(wsTextField)
+                            .addComponent(extDirTextField, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(chromeTextField, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(18, 18, 18)
                         .addGroup(configWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(chromeBrowse, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -214,21 +240,21 @@ public class AutoJARCUI extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
                 .addGroup(configWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(wsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
                     .addComponent(workspaceBrowse))
                 .addGap(18, 18, 18)
                 .addGroup(configWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(extDirTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
                     .addComponent(extBrowse))
                 .addGap(18, 18, 18)
                 .addGroup(configWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(chromeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
                     .addComponent(chromeBrowse))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(configOK)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -461,11 +487,33 @@ public class AutoJARCUI extends javax.swing.JFrame {
     }//GEN-LAST:event_errorBtnActionPerformed
 
     private void configBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_configBtnActionPerformed
+        try {
+            parseConfig();
+        } catch (FileNotFoundException ex) {
+            throwError("Configuration file was not found due to an anomaly in the space time continuum.");
+        }
        configWindow.pack();
        configWindow.setLocationRelativeTo(null);
        configWindow.setVisible(true);
     }//GEN-LAST:event_configBtnActionPerformed
 
+    
+    private void parseConfig() throws FileNotFoundException{
+    BufferedReader b = new BufferedReader(new FileReader(workDir + sep + "autojarc.conf"));
+        try {
+            String ws = b.readLine().split("=")[1];
+            String cp = b.readLine().split("=")[1];
+            String ed = b.readLine().split("=")[1];
+            b.close();
+            wsTextField.setText(ws);
+            chromeTextField.setText(cp);
+            extDirTextField.setText(ed);
+        } catch (IOException ex) {
+            throwError("Could not read the configuration file.");
+        }catch(java.lang.ArrayIndexOutOfBoundsException e){
+            throwError("Your configuration file is badly formatted. Delete it and restart this program.");
+        }
+    }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         aboutWindow.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -475,6 +523,47 @@ public class AutoJARCUI extends javax.swing.JFrame {
         aboutWindow.setLocationRelativeTo(null);
         aboutWindow.setVisible(true);
     }//GEN-LAST:event_aboutActionPerformed
+
+    private void workspaceBrowseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_workspaceBrowseActionPerformed
+        int returnVal = workspaceFC.showOpenDialog(AutoJARCUI.this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            wsTextField.setText(workspaceFC.getSelectedFile().getAbsolutePath());
+        }
+    }//GEN-LAST:event_workspaceBrowseActionPerformed
+
+    private void extBrowseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_extBrowseActionPerformed
+        int returnVal = extensionFC.showOpenDialog(AutoJARCUI.this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            extDirTextField.setText(extensionFC.getSelectedFile().getAbsolutePath());
+        }
+    }//GEN-LAST:event_extBrowseActionPerformed
+
+    private void chromeBrowseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chromeBrowseActionPerformed
+        int returnVal = chromeFC.showOpenDialog(AutoJARCUI.this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            chromeTextField.setText(chromeFC.getSelectedFile().getAbsolutePath());
+        }
+    }//GEN-LAST:event_chromeBrowseActionPerformed
+
+    private void configOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_configOKActionPerformed
+        String extDir = extDirTextField.getText();
+        String wsDir = wsTextField.getText();
+        String chromeDir = chromeTextField.getText();
+        
+        if(extDir.isEmpty() || wsDir.isEmpty() || chromeDir.isEmpty()){throwError("Please fill in all text fields.");return;}
+        
+        configuration = new Configuration(wsDir,chromeDir,extDir);
+        try {
+            configuration.output();
+        } catch (IOException ex) {
+           throwError("Could not write configuration file. You can use the program but you will have to enter your configuration on eahc launch.");
+        }
+        configWindow.dispose();
+    }//GEN-LAST:event_configOKActionPerformed
+
+    private void wsTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_wsTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_wsTextFieldActionPerformed
 
     /**
      * Displays an error message with the given text
@@ -516,6 +605,7 @@ public class AutoJARCUI extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new AutoJARCUI().setVisible(true);
             }
@@ -528,16 +618,18 @@ public class AutoJARCUI extends javax.swing.JFrame {
     private javax.swing.JFrame aboutWindow;
     private javax.swing.JButton chromeBrowse;
     private javax.swing.JFileChooser chromeFC;
+    private javax.swing.JTextField chromeTextField;
     private javax.swing.JButton configBtn;
+    private javax.swing.JButton configOK;
     private javax.swing.JFrame configWindow;
     private static javax.swing.JTextArea console;
     private javax.swing.JButton errorBtn;
     private static javax.swing.JDialog errorDia;
     private static javax.swing.JLabel errorText;
     private javax.swing.JButton extBrowse;
+    private javax.swing.JTextField extDirTextField;
     private javax.swing.JFileChooser extensionFC;
     private javax.swing.JButton ignoreBtn;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -552,12 +644,10 @@ public class AutoJARCUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JButton launchProjectBtn;
     private javax.swing.JButton scanBtn;
     private javax.swing.JButton workspaceBrowse;
     private javax.swing.JFileChooser workspaceFC;
+    private javax.swing.JTextField wsTextField;
     // End of variables declaration//GEN-END:variables
 }
