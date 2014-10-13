@@ -10,7 +10,7 @@
             <file>file:/F:/Programs/JavaDev/AutoJARC/src/com/github/gummywormz/AutoJARC/User/IgnoreList.java</file>
             <file>file:/F:/Programs/JavaDev/AutoJARC/src/com/github/gummywormz/AutoJARC/Background/DirectoryVerifier.java</file>
             <file>file:/F:/Programs/JavaDev/AutoJARC/src/com/github/gummywormz/AutoJARC/Background/GetHash.java</file>
-            <file>file:/F:/Programs/JavaDev/AutoJARC/src/com/github/gummywormz/AutoJARC/res/ConfigFiles/autojarc.projects</file>
+            <file>file:/F:/Programs/JavaDev/AutoJARC/src/com/github/gummywormz/AutoJARC/Background/IgnoreParser.java</file>
         </group>
     </open-files>
 </project-private>

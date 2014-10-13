@@ -36,6 +36,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JTextArea;
+import javax.swing.table.DefaultTableModel;
 
 /**
  * Main window of AutoJARC
@@ -101,7 +102,7 @@ public class AutoJARCUI extends javax.swing.JFrame {
              }
         out.close();
         projectsStream.close();
-    }else{projectList = new ArrayList<>(ProjectParser.getProjects());}
+    }else{projectList = new ArrayList<>(ProjectParser.getProjects());repaintTable();}
     if(!config.exists()){
         InputStream configStream = AutoJARCUI.class.getClassLoader().getResourceAsStream("com/github/gummywormz/AutoJARC/res/ConfigFile/autojarc.conf");
         OutputStream out = new FileOutputStream(config.getAbsolutePath());
@@ -155,7 +156,7 @@ public class AutoJARCUI extends javax.swing.JFrame {
         console = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        projectTable = new javax.swing.JTable();
         launchProjectBtn = new javax.swing.JButton();
         ignoreBtn = new javax.swing.JButton();
         scanBtn = new javax.swing.JButton();
@@ -371,22 +372,22 @@ public class AutoJARCUI extends javax.swing.JFrame {
 
         jLabel1.setText("Console:");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        projectTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Project", "Extension Directory", "APK Changed?"
+                "Project", "Extension Directory"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, true
+                false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -397,11 +398,22 @@ public class AutoJARCUI extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable1);
+        projectTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane2.setViewportView(projectTable);
 
         launchProjectBtn.setText("Launch");
+        launchProjectBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                launchProjectBtnActionPerformed(evt);
+            }
+        });
 
         ignoreBtn.setText("Ignore");
+        ignoreBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ignoreBtnActionPerformed(evt);
+            }
+        });
 
         scanBtn.setText("Scan");
         scanBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -585,6 +597,7 @@ public class AutoJARCUI extends javax.swing.JFrame {
         g.execute();
         try {
             projectList = new ArrayList<>(g.get());
+            repaintTable();
         } catch (InterruptedException | ExecutionException ex) {
             throwError("The scan was interrupted or something terrible happened.\n" + ex.getMessage());
         }
@@ -595,8 +608,33 @@ public class AutoJARCUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_scanBtnActionPerformed
 
+    private void ignoreBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ignoreBtnActionPerformed
+        int sel = projectTable.getSelectedRow();
+        Project dir = projectList.get(sel);
+        ignoreList.addDirectory(dir.getPackageName());
+        repaintTable();
+    }//GEN-LAST:event_ignoreBtnActionPerformed
+
+    private void launchProjectBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_launchProjectBtnActionPerformed
+        int row = projectTable.getSelectedRow();
+        if(row<0){throwError("Please select a project to launch!");return;}
+        Project p = projectList.get(row);
+        
+    }//GEN-LAST:event_launchProjectBtnActionPerformed
+
     private void updateConfig(String ws, String cp, String ed){
     configuration = new Configuration(ws,cp,ed);
+    }
+    
+    private void repaintTable(){
+    DefaultTableModel tm = new DefaultTableModel(new String[]{"Project","ExtensionDirectory"},projectList.size());
+    
+    for(Project p : projectList){
+        if(!ignoreList.isIgnored(p.getPackageName())){
+        String[] rowData = {p.getAppName(),Boolean.toString(p.hasExtensionDirectory())};
+        tm.addRow(rowData);}
+    }
+    projectTable.setModel(tm);
     }
     
     /**
@@ -693,8 +731,8 @@ public class AutoJARCUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton launchProjectBtn;
+    private javax.swing.JTable projectTable;
     private javax.swing.JButton scanBtn;
     private javax.swing.JButton workspaceBrowse;
     private javax.swing.JFileChooser workspaceFC;
