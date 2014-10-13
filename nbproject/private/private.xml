@@ -3,10 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/F:/Programs/JavaDev/AutoJARC/src/com/github/gummywormz/AutoJARC/Background/ProjectParser.java</file>
             <file>file:/F:/Programs/JavaDev/AutoJARC/src/com/github/gummywormz/AutoJARC/User/Project.java</file>
+            <file>file:/F:/Programs/JavaDev/AutoJARC/src/com/github/gummywormz/AutoJARC/Background/GetFoldersWorker.java</file>
             <file>file:/F:/Programs/JavaDev/AutoJARC/src/com/github/gummywormz/AutoJARC/UI/AutoJARCUI.java</file>
-            <file>file:/F:/Programs/JavaDev/AutoJARC/src/com/github/gummywormz/AutoJARC/User/Configuration.java</file>
-            <file>file:/F:/Programs/JavaDev/AutoJARC/src/com/github/gummywormz/AutoJARC/res/ConfigFiles/autojarc.conf</file>
+            <file>file:/F:/Programs/JavaDev/AutoJARC/src/com/github/gummywormz/AutoJARC/User/IgnoreList.java</file>
+            <file>file:/F:/Programs/JavaDev/AutoJARC/src/com/github/gummywormz/AutoJARC/Background/DirectoryVerifier.java</file>
+            <file>file:/F:/Programs/JavaDev/AutoJARC/src/com/github/gummywormz/AutoJARC/Background/GetHash.java</file>
+            <file>file:/F:/Programs/JavaDev/AutoJARC/src/com/github/gummywormz/AutoJARC/res/ConfigFiles/autojarc.projects</file>
         </group>
     </open-files>
 </project-private>

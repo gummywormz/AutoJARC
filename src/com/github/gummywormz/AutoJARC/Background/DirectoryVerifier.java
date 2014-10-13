@@ -34,6 +34,7 @@ import java.io.File;
 public class DirectoryVerifier {
  
     private File f;
+    private String apkName;
     
     /**
      * Creates a new directory verifier for this file
@@ -41,6 +42,7 @@ public class DirectoryVerifier {
      */
     public DirectoryVerifier(File pFile){
     f = pFile;
+    apkName = "Unknown";
     }
     
     /**
@@ -58,15 +60,24 @@ public class DirectoryVerifier {
     for(String a : apk){
         
         if(a.endsWith(".apk")){
+        apkName = a;
         found = true; 
         break;
-        
     }
     }
     if(!found){
     return new VerifierFlag(false,VerifierFlag.FAILURE_NO_APK_FOUND);
     }
     return new VerifierFlag(true,VerifierFlag.SUCCESS);
+    }
+    
+    /**
+     * Returns the name of the apk file. NOTE: This will not work if the directory has not been verified first.
+     * @return The name of the apk file
+     */
+    public String getApkName()
+    {
+    return apkName;
     }
     
 }

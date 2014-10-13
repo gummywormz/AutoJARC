@@ -92,4 +92,21 @@ public class Project {
     return extFolder;
     }
     
+    /**
+     * Sets if the project has an extension directory. 
+     * @param set True if the project has an extension directory, false if not
+     */
+    public void setExtensionDir(boolean set){
+    extFolder = set;
+    }
+    
+    /**
+     * Checks if the hash of the apk file matches the given hash
+     * @param h The hash to check
+     * @return True if the hashes match, false otherwise
+     */
+    public boolean verifyHash(String h){
+        return h.equals(apkHash);
+    }
+    
 }

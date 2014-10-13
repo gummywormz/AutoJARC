@@ -24,11 +24,14 @@
 
 package com.github.gummywormz.AutoJARC.UI;
 
+import com.github.gummywormz.AutoJARC.Background.GetFoldersWorker;
+import com.github.gummywormz.AutoJARC.Background.ProjectParser;
 import com.github.gummywormz.AutoJARC.JARC_APK.ExtensionGenerator;
 import com.github.gummywormz.AutoJARC.User.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
@@ -43,8 +46,10 @@ public class AutoJARCUI extends javax.swing.JFrame {
     private final String workDir;
     private ArrayList<Project> projectList;
     private Configuration configuration;
-    private IgnoreList ignoreList;
+    private static IgnoreList ignoreList;
     private final String sep = ExtensionGenerator.sep;
+    private static String workspaceDirS = "";
+    private static String extDirS = "";
     
     /**
      * Creates new form AutoJARCUI
@@ -96,7 +101,7 @@ public class AutoJARCUI extends javax.swing.JFrame {
              }
         out.close();
         projectsStream.close();
-    }
+    }else{projectList = new ArrayList<>(ProjectParser.getProjects());}
     if(!config.exists()){
         InputStream configStream = AutoJARCUI.class.getClassLoader().getResourceAsStream("com/github/gummywormz/AutoJARC/res/ConfigFile/autojarc.conf");
         OutputStream out = new FileOutputStream(config.getAbsolutePath());
@@ -110,7 +115,7 @@ public class AutoJARCUI extends javax.swing.JFrame {
         configWindow.pack();
         configWindow.setLocationRelativeTo(null);
         configWindow.setVisible(true);
-    }
+    }else{parseConfig(true);}
     }
 
     /**
@@ -399,6 +404,11 @@ public class AutoJARCUI extends javax.swing.JFrame {
         ignoreBtn.setText("Ignore");
 
         scanBtn.setText("Scan");
+        scanBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                scanBtnActionPerformed(evt);
+            }
+        });
 
         configBtn.setText("Setup");
         configBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -488,7 +498,7 @@ public class AutoJARCUI extends javax.swing.JFrame {
 
     private void configBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_configBtnActionPerformed
         try {
-            parseConfig();
+            parseConfig(false);
         } catch (FileNotFoundException ex) {
             throwError("Configuration file was not found due to an anomaly in the space time continuum.");
         }
@@ -498,16 +508,20 @@ public class AutoJARCUI extends javax.swing.JFrame {
     }//GEN-LAST:event_configBtnActionPerformed
 
     
-    private void parseConfig() throws FileNotFoundException{
+    private void parseConfig(boolean isLaunch) throws FileNotFoundException{
     BufferedReader b = new BufferedReader(new FileReader(workDir + sep + "autojarc.conf"));
         try {
             String ws = b.readLine().split("=")[1];
             String cp = b.readLine().split("=")[1];
             String ed = b.readLine().split("=")[1];
             b.close();
+            if(!isLaunch){
             wsTextField.setText(ws);
             chromeTextField.setText(cp);
-            extDirTextField.setText(ed);
+            extDirTextField.setText(ed);}
+            else{updateConfig(ws,cp,ed);
+            workspaceDirS = ws;
+            extDirS = ed;}
         } catch (IOException ex) {
             throwError("Could not read the configuration file.");
         }catch(java.lang.ArrayIndexOutOfBoundsException e){
@@ -551,8 +565,9 @@ public class AutoJARCUI extends javax.swing.JFrame {
         String chromeDir = chromeTextField.getText();
         
         if(extDir.isEmpty() || wsDir.isEmpty() || chromeDir.isEmpty()){throwError("Please fill in all text fields.");return;}
-        
-        configuration = new Configuration(wsDir,chromeDir,extDir);
+        workspaceDirS = wsDir;
+        extDirS = extDir;
+        updateConfig(wsDir,chromeDir,extDir);
         try {
             configuration.output();
         } catch (IOException ex) {
@@ -565,6 +580,25 @@ public class AutoJARCUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_wsTextFieldActionPerformed
 
+    private void scanBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scanBtnActionPerformed
+        GetFoldersWorker g = new GetFoldersWorker();
+        g.execute();
+        try {
+            projectList = new ArrayList<>(g.get());
+        } catch (InterruptedException | ExecutionException ex) {
+            throwError("The scan was interrupted or something terrible happened.\n" + ex.getMessage());
+        }
+        try {
+            ProjectParser.writeProjects(projectList);
+        } catch (IOException ex) {
+            throwError("Could not write back to the projects file. You can still interact with the program, but your list is not saved.");
+        }
+    }//GEN-LAST:event_scanBtnActionPerformed
+
+    private void updateConfig(String ws, String cp, String ed){
+    configuration = new Configuration(ws,cp,ed);
+    }
+    
     /**
      * Displays an error message with the given text
      * @param text The error text to display
@@ -574,6 +608,22 @@ public class AutoJARCUI extends javax.swing.JFrame {
     errorDia.pack();
     errorDia.setLocationRelativeTo(null); //center ze window
     errorDia.setVisible(true);
+    }
+    
+    /**
+     * Returns the workspace path
+     * @return The workspace path
+     */
+    public static String getWorkspace(){
+        return workspaceDirS;
+    }
+    
+    /**
+     * Returns the extension directory
+     * @return the extensino directory
+     */
+    public static String getExtensionDir(){
+        return extDirS;
     }
     
     /**
