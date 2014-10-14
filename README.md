@@ -15,9 +15,12 @@ Done:
 * ExtensionGenerator has been trimmed down to fit the project better
 * Configuration files stuff
 * Add a config file parser / writer
+* Add ignore list parser / writer
+* Add projects parser / writer
+* Add the actual scanner
+
 
 TO-DO:
 
-* Add ignore list parser / writer
-* Add projects parser / writer
-* Add the actual scanner / launcher
+* Add the launcher code.
+* Bug test for 75 years then release.
