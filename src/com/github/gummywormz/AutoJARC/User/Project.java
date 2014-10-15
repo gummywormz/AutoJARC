@@ -35,7 +35,7 @@ public class Project {
     private boolean extFolder;
     private String apkName;
     //extension directory name is not needed because its the same as the pkg name
-    
+
     /**
      * Creates a new project object
      * @param pkgName Name of the package / extension folder
@@ -51,55 +51,55 @@ public class Project {
         apkName = apk;
         extFolder = established;
     }
-    
+
     /**
      * Returns the name of this project's APK
      * @return the name of this project's APK (and folder name)
      */
     public String getPackageName(){
-    return pkg;
+        return pkg;
     }
-    
+
     /**
      * Returns the name of the app
      * @return The name of the app
      */
     public String getAppName(){
-    return name;
+        return name;
     }
-    
+
     /**
      * Gets the MD5 hash of the APK file
      * @return The MD5 hash of the APK file
      */
     public String getHash(){
-    return apkHash;
+        return apkHash;
     }
-    
+
     /**
      * Gets the file name of the apk in the bin folder
      * @return The file name of the project's apk file
      */
     public String getApkName(){
-    return apkName;
+        return apkName;
     }
-    
+
     /**
      * Returns if the project has an associated extension directory
      * @return True if a directory exists, false otherwise
      */
     public boolean hasExtensionDirectory(){
-    return extFolder;
+        return extFolder;
     }
-    
+
     /**
      * Sets if the project has an extension directory. 
      * @param set True if the project has an extension directory, false if not
      */
     public void setExtensionDir(boolean set){
-    extFolder = set;
+        extFolder = set;
     }
-    
+
     /**
      * Checks if the hash of the apk file matches the given hash
      * @param h The hash to check
@@ -108,5 +108,5 @@ public class Project {
     public boolean verifyHash(String h){
         return h.equals(apkHash);
     }
-    
+
 }

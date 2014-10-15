@@ -36,7 +36,7 @@ import java.security.NoSuchAlgorithmException;
  * @author Paul Alves
  */
 public class GetHash {
-    
+
     /**
      * Gets the MD5 hash of the file
      * @param f File to get hash of
@@ -45,24 +45,24 @@ public class GetHash {
      * @throws IOException
      */
     public static String getHash(File f) throws FileNotFoundException, IOException{
-     MessageDigest md;
+        MessageDigest md;
         try {
             md = MessageDigest.getInstance("MD5");
         } catch (NoSuchAlgorithmException ex) {
             return "Extreme error occurred. This statement should never be reached";
         }
         FileInputStream in = new FileInputStream(f);
- 
+
         byte[] buff = new byte[1024];
- 
+
         int read = 0; 
         while ((read = in.read(buff)) != -1) {
-          md.update(buff, 0, read);
+            md.update(buff, 0, read);
         }
         byte[] mdbytes = md.digest();
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < mdbytes.length; i++) {
-          sb.append(Integer.toString((mdbytes[i] & 0xff) + 0x100, 16).substring(1));
+            sb.append(Integer.toString((mdbytes[i] & 0xff) + 0x100, 16).substring(1));
         }
 
         return sb.toString();

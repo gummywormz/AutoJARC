@@ -32,52 +32,52 @@ import java.io.File;
  * @author Paul Alves
  */
 public class DirectoryVerifier {
- 
+
     private File f;
     private String apkName;
-    
+
     /**
      * Creates a new directory verifier for this file
      * @param pFile The file to verify
      */
     public DirectoryVerifier(File pFile){
-    f = pFile;
-    apkName = "Unknown";
+        f = pFile;
+        apkName = "Unknown";
     }
-    
+
     /**
      *
      * Verifies the file
      * @return A VerifierFlag with the status of the verification
      */
     public VerifierFlag verify(){
-    if(!f.isDirectory()){return new VerifierFlag(false,VerifierFlag.FAILURE_INVALID_OR_CORRUPTED_PROJECT);}   
-    //if(AutoJARCUI.getIgnoreList.isIgnored(f.getName())){return new VerifierFlag(false,VerifierFlag.FAILURE_IGNORED_DIRECTORY);}
-    File bin = new File(f.getAbsolutePath() + ExtensionGenerator.sep + "bin");
-    if(!bin.exists()){return new VerifierFlag(false,VerifierFlag.FAILURE_NO_PROJECT_FOUND);}
-    String[] apk = bin.list();
-    boolean found = false;
-    for(String a : apk){
-        
-        if(a.endsWith(".apk")){
-        apkName = a;
-        found = true; 
-        break;
+        if(!f.isDirectory()){return new VerifierFlag(false,VerifierFlag.FAILURE_INVALID_OR_CORRUPTED_PROJECT);}   
+        //if(AutoJARCUI.getIgnoreList.isIgnored(f.getName())){return new VerifierFlag(false,VerifierFlag.FAILURE_IGNORED_DIRECTORY);}
+        File bin = new File(f.getAbsolutePath() + ExtensionGenerator.sep + "bin");
+        if(!bin.exists()){return new VerifierFlag(false,VerifierFlag.FAILURE_NO_PROJECT_FOUND);}
+        String[] apk = bin.list();
+        boolean found = false;
+        for(String a : apk){
+
+            if(a.endsWith(".apk")){
+                apkName = a;
+                found = true; 
+                break;
+            }
+        }
+        if(!found){
+            return new VerifierFlag(false,VerifierFlag.FAILURE_NO_APK_FOUND);
+        }
+        return new VerifierFlag(true,VerifierFlag.SUCCESS);
     }
-    }
-    if(!found){
-    return new VerifierFlag(false,VerifierFlag.FAILURE_NO_APK_FOUND);
-    }
-    return new VerifierFlag(true,VerifierFlag.SUCCESS);
-    }
-    
+
     /**
      * Returns the name of the apk file. NOTE: This will not work if the directory has not been verified first.
      * @return The name of the apk file
      */
     public String getApkName()
     {
-    return apkName;
+        return apkName;
     }
-    
+
 }

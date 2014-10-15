@@ -31,40 +31,40 @@ import java.util.ArrayList;
  * @author Paul Alves
  */
 public class IgnoreList {
-    
+
     private final ArrayList<String> dirs;
-    
+
     /**
      * Constructs a blank ignore list
      */
     public IgnoreList(){
-    dirs = new ArrayList<>();
+        dirs = new ArrayList<>();
     }
-    
+
     /**
      * Constructs an IgnoreList from an ArrayList
      * @param i
      */
     public IgnoreList(ArrayList<String> i){
-    dirs = new ArrayList<>(i);
+        dirs = new ArrayList<>(i);
     }
-    
+
     /**
      * Returns the entire IgnoreList
      * @return the entire IgnoreList
      */
     public ArrayList<String> getList(){
-    return dirs;
+        return dirs;
     }
-    
+
     /**
      * Adds a directory to this IgnoreList
      * @param dir The directory to ignore (as just the folder name, not the complete path)
      */
     public void addDirectory(String dir){
-    dirs.add(dir);
+        dirs.add(dir);
     }
-    
+
     /**
      * Determines if the directory is ignored
      * @param dir The directory name (not the full path, only the name in the workspace folder)
@@ -72,9 +72,9 @@ public class IgnoreList {
      */
     public boolean isIgnored(String dir){
         for(String s : dirs){
-        if(s.equals(dir)){return true;}
+            if(s.equals(dir)){return true;}
         }
         return false;
     }
-    
+
 }

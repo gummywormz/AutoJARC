@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=p
+comment0.target=void\ writeProjects(java.util.ArrayList)
+comment0.text=\r\n\ Writes\ a\ given\ ArrayList\ of\ projects\ to\ autojarc.projects\r\n\ @param\ p\ The\ list\ of\ projects\ to\ write\ (this\ will\ overwrite\ the\ file)\r\n\ @throws\ IOException\r\n
+comment1.params=
+comment1.target=java.util.ArrayList\ getProjects()
+comment1.text=\r\n\ Gets\ an\ arraylist\ of\ projects\ from\ autojarc.projects\r\n\ @return\ Arraylist\ of\ projects\r\n\ @throws\ FileNotFoundException\r\n\ @throws\ IOException\r\n
+numComments=2

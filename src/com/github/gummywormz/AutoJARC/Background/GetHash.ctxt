@@ -1,0 +1,5 @@
+#BlueJ class context
+comment0.params=f
+comment0.target=java.lang.String\ getHash(java.io.File)
+comment0.text=\r\n\ Gets\ the\ MD5\ hash\ of\ the\ file\r\n\ @param\ f\ File\ to\ get\ hash\ of\r\n\ @return\ The\ hash\ as\ a\ string\r\n\ @throws\ FileNotFoundException\r\n\ @throws\ IOException\r\n
+numComments=1

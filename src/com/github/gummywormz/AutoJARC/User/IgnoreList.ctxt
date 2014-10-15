@@ -1,0 +1,17 @@
+#BlueJ class context
+comment0.params=
+comment0.target=IgnoreList()
+comment0.text=\r\n\ Constructs\ a\ blank\ ignore\ list\r\n
+comment1.params=i
+comment1.target=IgnoreList(java.util.ArrayList)
+comment1.text=\r\n\ Constructs\ an\ IgnoreList\ from\ an\ ArrayList\r\n\ @param\ i\r\n
+comment2.params=
+comment2.target=java.util.ArrayList\ getList()
+comment2.text=\r\n\ Returns\ the\ entire\ IgnoreList\r\n\ @return\ the\ entire\ IgnoreList\r\n
+comment3.params=dir
+comment3.target=void\ addDirectory(java.lang.String)
+comment3.text=\r\n\ Adds\ a\ directory\ to\ this\ IgnoreList\r\n\ @param\ dir\ The\ directory\ to\ ignore\ (as\ just\ the\ folder\ name,\ not\ the\ complete\ path)\r\n
+comment4.params=dir
+comment4.target=boolean\ isIgnored(java.lang.String)
+comment4.text=\r\n\ Determines\ if\ the\ directory\ is\ ignored\r\n\ @param\ dir\ The\ directory\ name\ (not\ the\ full\ path,\ only\ the\ name\ in\ the\ workspace\ folder)\r\n\ @return\ True\ if\ ignored,\ false\ if\ not.\r\n
+numComments=5

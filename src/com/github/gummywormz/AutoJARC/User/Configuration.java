@@ -38,7 +38,7 @@ public class Configuration {
     private String workspaceDir;
     private String chromePath;
     private String extensionDir;
-    
+
     /**
      * Creates a new configuration object NOTE: all paths are to be absolute
      * @param ws Directory to the user's workspace
@@ -46,81 +46,81 @@ public class Configuration {
      * @param ed Path to the extension directory
      */
     public Configuration(String ws, String cp,String ed){
-    workspaceDir = ws;
-    chromePath = cp;
-    extensionDir = ed;
+        workspaceDir = ws;
+        chromePath = cp;
+        extensionDir = ed;
     }
-    
+
     /**
      * Sets Chrome's path (including the executable file)
      * @param path Path to Chrome
      */
     public void setChromePath(String path){
-    chromePath = path;
+        chromePath = path;
     }
-    
+
     /**
      * Sets the workspace directory
      * @param path Workspace directory path
      */
     public void setWorkSpace(String path){
-    workspaceDir = path;
+        workspaceDir = path;
     }
-    
+
     /**
      * Sets the extension directory
      * @param path The extension directory to set.
      */
     public void setExtensionDirectory(String path){
-    extensionDir = path;
+        extensionDir = path;
     }
-    
+
     /**
      * Returns this workspace as a String
      * @return this workspace as a String
      */
     public String getWorkSpace(){
-    return workspaceDir;
+        return workspaceDir;
     }
-    
+
     /**
      * Returns the Chrome path as a String
      * @return the Chrome path as a String
      */
     public String getChromePath(){
-    return chromePath;
+        return chromePath;
     }
-    
+
     /**
      * Returns the extension directory as a String
      * @return the extension directory as a String
      */
     public String getExtensionDirectory(){
-    return extensionDir;
+        return extensionDir;
     }
-    
+
     /**
      * Returns the workspace directory as a File
      * @return the workspace directory as a File
      */
     public File getWorkSpaceAsFile(){
-    return new File(workspaceDir);
+        return new File(workspaceDir);
     }
-    
+
     /**
      * Returns the Chrome path as a File
      * @return the Chrome path as a File
      */
     public File getChromePathAsFile(){
-    return new File(chromePath);
+        return new File(chromePath);
     }
-    
+
     /**
      * Returns the Extension Directory as a File
      * @return the Extension Directory as a File
      */
     public File getExtensionDirAsFile(){
-    return new File(extensionDir);
+        return new File(extensionDir);
     }
 
     /**
@@ -140,5 +140,5 @@ public class Configuration {
         }
         w.close();
     }
-    
+
 }

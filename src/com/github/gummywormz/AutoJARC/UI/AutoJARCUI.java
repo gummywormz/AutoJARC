@@ -58,7 +58,7 @@ public class AutoJARCUI extends javax.swing.JFrame {
     private final String sep = ExtensionGenerator.sep;
     private static String workspaceDirS = "";
     private static String extDirS = "";
-    
+
     /**
      * Creates new form AutoJARCUI
      */
@@ -70,19 +70,19 @@ public class AutoJARCUI extends javax.swing.JFrame {
             checkFiles();
         } catch (IOException ex) {
             throwError("An IO error occurred when writing config files. Make sure you have proper permissions to write the needed files."
-                    + "\nUnfortunately, AutoJARC will not work without these files being written."
-                    + "\nTry getting the config files under the res/ConfigFiles folder on the Github page (see About) and downloading them to the same directory as the JAR file.");
+                + "\nUnfortunately, AutoJARC will not work without these files being written."
+                + "\nTry getting the config files under the res/ConfigFiles folder on the Github page (see About) and downloading them to the same directory as the JAR file.");
         }
     }
-    
+
     /**
      * Gets the console so it can be written to by swing workers
      * @return The Console text area
      */
     public static JTextArea getConsole(){
-    return console;
+        return console;
     }
-    
+
     /**
      * Checks the autojarc.* files to see if they exist. If they do, load them into the objects. Otherwise, output the default files.
      * @throws FileNotFoundException
@@ -90,52 +90,52 @@ public class AutoJARCUI extends javax.swing.JFrame {
      */
     private void checkFiles() throws FileNotFoundException, IOException{
 
-    File config = new File(workDir + sep + "autojarc.conf");
-    File ignore = new File(workDir + sep + "autojarc.ignore");
-    File projects = new File(workDir + sep + "autojarc.projects");
-    if(!ignore.exists()){
-        InputStream ignoreStream = AutoJARCUI.class.getClassLoader().getResourceAsStream("com/github/gummywormz/AutoJARC/res/ConfigFiles/autojarc.ignore");
-        OutputStream out = new FileOutputStream(ignore.getAbsolutePath());
-        byte[] buf = new byte[1024];
-        int len;
-        while((len=ignoreStream.read(buf))>0){
-             out.write(buf,0,len);
-             }
-        out.close();
-        ignoreStream.close();
-    }else{ignoreList  = IgnoreParser.getIgnoreList();}
-    if(!projects.exists()){
-        InputStream projectsStream = AutoJARCUI.class.getClassLoader().getResourceAsStream("com/github/gummywormz/AutoJARC/res/ConfigFiles/autojarc.projects");
-        OutputStream out = new FileOutputStream(projects.getAbsolutePath());
-        byte[] buf = new byte[1024];
-        int len;
-        while((len=projectsStream.read(buf))>0){
-             out.write(buf,0,len);
-             }
-        out.close();
-        projectsStream.close();
-    }else{projectList = new ArrayList<>(ProjectParser.getProjects());repaintTable();}
-    if(!config.exists()){
-        InputStream configStream = AutoJARCUI.class.getClassLoader().getResourceAsStream("com/github/gummywormz/AutoJARC/res/ConfigFiles/autojarc.conf");
-        OutputStream out = new FileOutputStream(config.getAbsolutePath());
-        byte[] buf = new byte[1024];
-        int len;
-        while((len=configStream.read(buf))>0){
-             out.write(buf,0,len);
-             }
-        out.close();
-        configStream.close();
-        configWindow.pack();
-        configWindow.setLocationRelativeTo(null);
-        configWindow.setVisible(true);
-    }else{parseConfig(true);}
+        File config = new File(workDir + sep + "autojarc.conf");
+        File ignore = new File(workDir + sep + "autojarc.ignore");
+        File projects = new File(workDir + sep + "autojarc.projects");
+        if(!ignore.exists()){
+            InputStream ignoreStream = AutoJARCUI.class.getClassLoader().getResourceAsStream("com/github/gummywormz/AutoJARC/res/ConfigFiles/autojarc.ignore");
+            OutputStream out = new FileOutputStream(ignore.getAbsolutePath());
+            byte[] buf = new byte[1024];
+            int len;
+            while((len=ignoreStream.read(buf))>0){
+                out.write(buf,0,len);
+            }
+            out.close();
+            ignoreStream.close();
+        }else{ignoreList  = IgnoreParser.getIgnoreList();}
+        if(!projects.exists()){
+            InputStream projectsStream = AutoJARCUI.class.getClassLoader().getResourceAsStream("com/github/gummywormz/AutoJARC/res/ConfigFiles/autojarc.projects");
+            OutputStream out = new FileOutputStream(projects.getAbsolutePath());
+            byte[] buf = new byte[1024];
+            int len;
+            while((len=projectsStream.read(buf))>0){
+                out.write(buf,0,len);
+            }
+            out.close();
+            projectsStream.close();
+        }else{projectList = new ArrayList<>(ProjectParser.getProjects());repaintTable();}
+        if(!config.exists()){
+            InputStream configStream = AutoJARCUI.class.getClassLoader().getResourceAsStream("com/github/gummywormz/AutoJARC/res/ConfigFiles/autojarc.conf");
+            OutputStream out = new FileOutputStream(config.getAbsolutePath());
+            byte[] buf = new byte[1024];
+            int len;
+            while((len=configStream.read(buf))>0){
+                out.write(buf,0,len);
+            }
+            out.close();
+            configStream.close();
+            configWindow.pack();
+            configWindow.setLocationRelativeTo(null);
+            configWindow.setVisible(true);
+        }else{parseConfig(true);}
     }
 
     /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
+    * This method is called from within the constructor to initialize the form.
+    * WARNING: Do NOT modify this code. The content of this method is always
+    * regenerated by the Form Editor.
+    */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -185,10 +185,10 @@ public class AutoJARCUI extends javax.swing.JFrame {
         jLabel4.setText("Configuration");
 
         wsTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                wsTextFieldActionPerformed(evt);
-            }
-        });
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    wsTextFieldActionPerformed(evt);
+                }
+            });
 
         jLabel5.setText("Workspace Directory:");
 
@@ -198,31 +198,31 @@ public class AutoJARCUI extends javax.swing.JFrame {
 
         configOK.setText("OK");
         configOK.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                configOKActionPerformed(evt);
-            }
-        });
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    configOKActionPerformed(evt);
+                }
+            });
 
         workspaceBrowse.setText("Browse");
         workspaceBrowse.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                workspaceBrowseActionPerformed(evt);
-            }
-        });
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    workspaceBrowseActionPerformed(evt);
+                }
+            });
 
         extBrowse.setText("Browse");
         extBrowse.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                extBrowseActionPerformed(evt);
-            }
-        });
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    extBrowseActionPerformed(evt);
+                }
+            });
 
         chromeBrowse.setText("Browse");
         chromeBrowse.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chromeBrowseActionPerformed(evt);
-            }
-        });
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    chromeBrowseActionPerformed(evt);
+                }
+            });
 
         javax.swing.GroupLayout configWindowLayout = new javax.swing.GroupLayout(configWindow.getContentPane());
         configWindow.getContentPane().setLayout(configWindowLayout);
@@ -297,10 +297,10 @@ public class AutoJARCUI extends javax.swing.JFrame {
 
         errorBtn.setText("OK");
         errorBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                errorBtnActionPerformed(evt);
-            }
-        });
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    errorBtnActionPerformed(evt);
+                }
+            });
 
         javax.swing.GroupLayout errorDiaLayout = new javax.swing.GroupLayout(errorDia.getContentPane());
         errorDia.getContentPane().setLayout(errorDiaLayout);
@@ -336,10 +336,10 @@ public class AutoJARCUI extends javax.swing.JFrame {
 
         jButton2.setText("OK");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton2ActionPerformed(evt);
+                }
+            });
 
         aboutHTML.setEditable(false);
         aboutHTML.setEditorKit(new HTMLEditorKit());
@@ -393,65 +393,65 @@ public class AutoJARCUI extends javax.swing.JFrame {
         jLabel1.setText("Console:");
 
         projectTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+                new Object [][] {
 
-            },
-            new String [] {
-                "Project", "Extension Directory"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
+                },
+                new String [] {
+                    "Project", "Extension Directory"
+                }
+            ) {
+                Class[] types = new Class [] {
+                        java.lang.String.class, java.lang.String.class
+                    };
+                boolean[] canEdit = new boolean [] {
+                        false, false
+                    };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
+                public Class getColumnClass(int columnIndex) {
+                    return types [columnIndex];
+                }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return canEdit [columnIndex];
+                }
+            });
         projectTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(projectTable);
 
         launchProjectBtn.setText("Launch");
         launchProjectBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                launchProjectBtnActionPerformed(evt);
-            }
-        });
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    launchProjectBtnActionPerformed(evt);
+                }
+            });
 
         ignoreBtn.setText("Ignore");
         ignoreBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ignoreBtnActionPerformed(evt);
-            }
-        });
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    ignoreBtnActionPerformed(evt);
+                }
+            });
 
         scanBtn.setText("Scan");
         scanBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                scanBtnActionPerformed(evt);
-            }
-        });
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    scanBtnActionPerformed(evt);
+                }
+            });
 
         configBtn.setText("Setup");
         configBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                configBtnActionPerformed(evt);
-            }
-        });
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    configBtnActionPerformed(evt);
+                }
+            });
 
         about.setText("About");
         about.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                aboutActionPerformed(evt);
-            }
-        });
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    aboutActionPerformed(evt);
+                }
+            });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel2.setText("Welcome to AutoJARC");
@@ -531,9 +531,9 @@ public class AutoJARCUI extends javax.swing.JFrame {
         } catch (FileNotFoundException ex) {
             throwError("Configuration file was not found due to an anomaly in the space time continuum.");
         }
-       configWindow.pack();
-       configWindow.setLocationRelativeTo(null);
-       configWindow.setVisible(true);
+        configWindow.pack();
+        configWindow.setLocationRelativeTo(null);
+        configWindow.setVisible(true);
     }//GEN-LAST:event_configBtnActionPerformed
 
     /**
@@ -542,25 +542,26 @@ public class AutoJARCUI extends javax.swing.JFrame {
      * @throws FileNotFoundException 
      */
     private void parseConfig(boolean isLaunch) throws FileNotFoundException{
-    BufferedReader b = new BufferedReader(new FileReader(workDir + sep + "autojarc.conf"));
+        BufferedReader b = new BufferedReader(new FileReader(workDir + sep + "autojarc.conf"));
         try {
             String ws = b.readLine().split("=")[1];
             String cp = b.readLine().split("=")[1];
             String ed = b.readLine().split("=")[1];
             b.close();
             if(!isLaunch){
-            wsTextField.setText(ws);
-            chromeTextField.setText(cp);
-            extDirTextField.setText(ed);}
+                wsTextField.setText(ws);
+                chromeTextField.setText(cp);
+                extDirTextField.setText(ed);}
             else{updateConfig(ws,cp,ed);
-            workspaceDirS = ws;
-            extDirS = ed;}
+                workspaceDirS = ws;
+                extDirS = ed;}
         } catch (IOException ex) {
             throwError("Could not read the configuration file.");
         }catch(java.lang.ArrayIndexOutOfBoundsException e){
             throwError("Your configuration file is badly formatted. Delete it and restart this program.");
         }
     }
+
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         aboutWindow.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -568,16 +569,16 @@ public class AutoJARCUI extends javax.swing.JFrame {
     private void aboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutActionPerformed
         aboutHTML.addHyperlinkListener(new HyperlinkListener() {
 
-            @Override
-            public void hyperlinkUpdate(HyperlinkEvent e) {
-                 if (Desktop.isDesktopSupported() && e.getEventType()==HyperlinkEvent.EventType.ACTIVATED) {
-                try {
-                    Desktop.getDesktop().browse(e.getURL().toURI());
-                } catch (IOException | URISyntaxException e1) {
-                    throwError("It seems you can't do that...go here instead: https://github.com/gummywormz/AutoJARC");
+                @Override
+                public void hyperlinkUpdate(HyperlinkEvent e) {
+                    if (Desktop.isDesktopSupported() && e.getEventType()==HyperlinkEvent.EventType.ACTIVATED) {
+                        try {
+                            Desktop.getDesktop().browse(e.getURL().toURI());
+                        } catch (IOException | URISyntaxException e1) {
+                            throwError("It seems you can't do that...go here instead: https://github.com/gummywormz/AutoJARC");
+                        }
+                    }
                 }
-            }
-        }
 
             });
         aboutWindow.pack();
@@ -610,7 +611,7 @@ public class AutoJARCUI extends javax.swing.JFrame {
         String extDir = extDirTextField.getText();
         String wsDir = wsTextField.getText();
         String chromeDir = chromeTextField.getText();
-        
+
         if(extDir.isEmpty() || wsDir.isEmpty() || chromeDir.isEmpty()){throwError("Please fill in all text fields.");return;}
         workspaceDirS = wsDir;
         extDirS = extDir;
@@ -618,7 +619,7 @@ public class AutoJARCUI extends javax.swing.JFrame {
         try {
             configuration.output();
         } catch (IOException ex) {
-           throwError("Could not write configuration file. You can use the program but you will have to enter your configuration on eahc launch.");
+            throwError("Could not write configuration file. You can use the program but you will have to enter your configuration on eahc launch.");
         }
         configWindow.dispose();
     }//GEN-LAST:event_configOKActionPerformed
@@ -665,21 +666,21 @@ public class AutoJARCUI extends javax.swing.JFrame {
         File apkPath = new File(configuration.getWorkSpace() + sep + p.getAppName() + sep + "bin" + sep + p.getApkName());
         File replaceApk = new File(configuration.getExtensionDirectory() + sep + p.getPackageName() + sep + "vendor" + sep + "chromium" + sep + "crx" + sep + p.getApkName());
         if(!p.hasExtensionDirectory()){
-        ExtensionGenerator x = new ExtensionGenerator(p.getPackageName(),apkPath,p.getAppName());
-        x.generate(configuration.getExtensionDirAsFile());
-        p.setExtensionDir(true);
-        projectList.set(row-1, p);
-        repaintTable();
+            ExtensionGenerator x = new ExtensionGenerator(p.getPackageName(),apkPath,p.getAppName());
+            x.generate(configuration.getExtensionDirAsFile());
+            p.setExtensionDir(true);
+            projectList.set(row-1, p);
+            repaintTable();
         }else try {
-            if(!p.verifyHash(GetHash.getHash(replaceApk))){
-            
-            copyFile(apkPath,replaceApk);
-            console.append("DEBUG(trying to replace this apk): " + replaceApk.getAbsolutePath());
-            }
-        } catch (IOException ex) {
-            throwError("Could not access the apk file for verification / transfer of updates. Make sure you have access to it.");
+                if(!p.verifyHash(GetHash.getHash(replaceApk))){
+
+                    copyFile(apkPath,replaceApk);
+                    console.append("DEBUG(trying to replace this apk): " + replaceApk.getAbsolutePath());
+                }
+            } catch (IOException ex) {
+                throwError("Could not access the apk file for verification / transfer of updates. Make sure you have access to it.");
         }
-        
+
         String chromePathReal;
         if(configuration.getChromePath().endsWith(".app")){
             String isCanary;
@@ -707,29 +708,29 @@ public class AutoJARCUI extends javax.swing.JFrame {
      * @param output The output file (where to copy)
      */
     private void copyFile(File input, File output){
-//really dirty hack
+        //really dirty hack
         InputStream inStream = null;
         OutputStream outStream = null;
         try{
- 
+
             inStream = new FileInputStream(input);
             outStream = new FileOutputStream(output);
- 
+
             byte[] buffer = new byte[1024];
- 
+
             int length;
             while ((length = inStream.read(buffer)) > 0){
                 outStream.write(buffer, 0, length);
             }
- 
+
             inStream.close();
             outStream.close();
- 
+
         }catch(IOException e){
             throwError("Could not access the apk file for verification / transfer of updates. Make sure you have access to it.");
         }
-}
-    
+    }
+
     /**
      * Manually updates the configuration object
      * @param ws Workspace Directory
@@ -737,34 +738,34 @@ public class AutoJARCUI extends javax.swing.JFrame {
      * @param ed Path to the extension directory.
      */
     private void updateConfig(String ws, String cp, String ed){
-    configuration = new Configuration(ws,cp,ed);
+        configuration = new Configuration(ws,cp,ed);
     }
-    
+
     /**
      * Updates the JTable 
      */
     private void repaintTable(){
-    DefaultTableModel tm = new DefaultTableModel(new String[]{"Project","Has Extension Directory?"},projectList.size());
-    
-    for(Project p : projectList){
-        if(!ignoreList.isIgnored(p.getAppName())){
-        String[] rowData = {p.getAppName(),Boolean.toString(p.hasExtensionDirectory())};
-        tm.addRow(rowData);}
+        DefaultTableModel tm = new DefaultTableModel(new String[]{"Project","Has Extension Directory?"},projectList.size());
+
+        for(Project p : projectList){
+            if(!ignoreList.isIgnored(p.getAppName())){
+                String[] rowData = {p.getAppName(),Boolean.toString(p.hasExtensionDirectory())};
+                tm.addRow(rowData);}
+        }
+        projectTable.setModel(tm);
     }
-    projectTable.setModel(tm);
-    }
-    
+
     /**
      * Displays an error message with the given text
      * @param text The error text to display
      */
     public static void throwError(String text){
-    errorText.setText(text);
-    errorDia.pack();
-    errorDia.setLocationRelativeTo(null); //center ze window
-    errorDia.setVisible(true);
+        errorText.setText(text);
+        errorDia.pack();
+        errorDia.setLocationRelativeTo(null); //center ze window
+        errorDia.setVisible(true);
     }
-    
+
     /**
      * Returns the workspace path
      * @return The workspace path
@@ -772,7 +773,7 @@ public class AutoJARCUI extends javax.swing.JFrame {
     public static String getWorkspace(){
         return workspaceDirS;
     }
-    
+
     /**
      * Returns the extension directory
      * @return the extensino directory
@@ -780,7 +781,7 @@ public class AutoJARCUI extends javax.swing.JFrame {
     public static String getExtensionDir(){
         return extDirS;
     }
-    
+
     /**
      * @param args the command line arguments
      */
@@ -810,11 +811,11 @@ public class AutoJARCUI extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new AutoJARCUI().setVisible(true);
-            }
-        });
+                @Override
+                public void run() {
+                    new AutoJARCUI().setVisible(true);
+                }
+            });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

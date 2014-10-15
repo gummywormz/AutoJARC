@@ -1,6 +1,5 @@
 package com.github.gummywormz.AutoJARC.Background;
 
-
 import com.github.gummywormz.AutoJARC.JARC_APK.ExtensionGenerator;
 import com.github.gummywormz.AutoJARC.UI.AutoJARCUI;
 import com.github.gummywormz.AutoJARC.User.Project;
@@ -17,9 +16,9 @@ import net.erdfelt.android.apk.AndroidApk;
  */
 public class GetFoldersWorker extends javax.swing.SwingWorker<ArrayList<Project>, String>
 {
-    
+
     private JTextArea console = null;
-    
+
     @Override
     protected ArrayList<Project> doInBackground() throws Exception {
         publish("Started scanning projects");
@@ -31,25 +30,25 @@ public class GetFoldersWorker extends javax.swing.SwingWorker<ArrayList<Project>
             DirectoryVerifier d = new DirectoryVerifier(test);
             VerifierFlag v = d.verify();
             if( test.isDirectory() && v.getSuccess()){
-            String apk = test.getAbsolutePath()+ ExtensionGenerator.sep + "bin" + ExtensionGenerator.sep + d.getApkName();
-            String pkg = new AndroidApk(new File(apk)).getPackageName();
-            String hash = GetHash.getHash(new File(apk));
-            boolean hasExt = new File(AutoJARCUI.getExtensionDir() + ExtensionGenerator.sep + pkg).exists();
-            Project p = new Project(pkg,test.getName(),hash,d.getApkName(),hasExt);
-            projs.add(p);
-            publish("Added " + test.getAbsolutePath());
+                String apk = test.getAbsolutePath()+ ExtensionGenerator.sep + "bin" + ExtensionGenerator.sep + d.getApkName();
+                String pkg = new AndroidApk(new File(apk)).getPackageName();
+                String hash = GetHash.getHash(new File(apk));
+                boolean hasExt = new File(AutoJARCUI.getExtensionDir() + ExtensionGenerator.sep + pkg).exists();
+                Project p = new Project(pkg,test.getName(),hash,d.getApkName(),hasExt);
+                projs.add(p);
+                publish("Added " + test.getAbsolutePath());
             }else{
-            publish("Not adding " + test.getAbsolutePath() + " because: " + v.getReasonAsMessage());
-        }
+                publish("Not adding " + test.getAbsolutePath() + " because: " + v.getReasonAsMessage());
+            }
         }
         return projs;
     }
-    
+
     @Override
     protected void process(List< String> chunks){
-    console = AutoJARCUI.getConsole();
-      for (final String string : chunks) {
-          console.append(string + "\n");
-    }
+        console = AutoJARCUI.getConsole();
+        for (final String string : chunks) {
+            console.append(string + "\n");
+        }
     }
 }

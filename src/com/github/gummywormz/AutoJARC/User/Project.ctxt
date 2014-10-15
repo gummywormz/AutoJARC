@@ -1,0 +1,26 @@
+#BlueJ class context
+comment0.params=pkgName\ appName\ hash\ apk\ established
+comment0.target=Project(java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ boolean)
+comment0.text=\r\n\ Creates\ a\ new\ project\ object\r\n\ @param\ pkgName\ Name\ of\ the\ package\ /\ extension\ folder\r\n\ @param\ appName\ Name\ of\ the\ app\r\n\ @param\ hash\ Hash\ of\ the\ APK\ (to\ check\ for\ changes\ to\ the\ file)\r\n\ @param\ apk\ Name\ of\ the\ APK\ file\r\n\ @param\ established\ Whether\ there\ an\ extension\ directory\ has\ been\ established.\r\n
+comment1.params=
+comment1.target=java.lang.String\ getPackageName()
+comment1.text=\r\n\ Returns\ the\ name\ of\ this\ project's\ APK\r\n\ @return\ the\ name\ of\ this\ project's\ APK\ (and\ folder\ name)\r\n
+comment2.params=
+comment2.target=java.lang.String\ getAppName()
+comment2.text=\r\n\ Returns\ the\ name\ of\ the\ app\r\n\ @return\ The\ name\ of\ the\ app\r\n
+comment3.params=
+comment3.target=java.lang.String\ getHash()
+comment3.text=\r\n\ Gets\ the\ MD5\ hash\ of\ the\ APK\ file\r\n\ @return\ The\ MD5\ hash\ of\ the\ APK\ file\r\n
+comment4.params=
+comment4.target=java.lang.String\ getApkName()
+comment4.text=\r\n\ Gets\ the\ file\ name\ of\ the\ apk\ in\ the\ bin\ folder\r\n\ @return\ The\ file\ name\ of\ the\ project's\ apk\ file\r\n
+comment5.params=
+comment5.target=boolean\ hasExtensionDirectory()
+comment5.text=\r\n\ Returns\ if\ the\ project\ has\ an\ associated\ extension\ directory\r\n\ @return\ True\ if\ a\ directory\ exists,\ false\ otherwise\r\n
+comment6.params=set
+comment6.target=void\ setExtensionDir(boolean)
+comment6.text=\r\n\ Sets\ if\ the\ project\ has\ an\ extension\ directory.\ \r\n\ @param\ set\ True\ if\ the\ project\ has\ an\ extension\ directory,\ false\ if\ not\r\n
+comment7.params=h
+comment7.target=boolean\ verifyHash(java.lang.String)
+comment7.text=\r\n\ Checks\ if\ the\ hash\ of\ the\ apk\ file\ matches\ the\ given\ hash\r\n\ @param\ h\ The\ hash\ to\ check\r\n\ @return\ True\ if\ the\ hashes\ match,\ false\ otherwise\r\n
+numComments=8

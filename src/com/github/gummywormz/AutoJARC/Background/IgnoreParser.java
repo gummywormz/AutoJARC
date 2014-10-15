@@ -38,7 +38,7 @@ import java.io.IOException;
  * @author Paul Alves
  */
 public class IgnoreParser {
-    
+
     /**
      * Gets the IgnoreList from autojarc.ignore
      * @return The IgnoreList object based on autojarc.ignore
@@ -53,12 +53,12 @@ public class IgnoreParser {
         String ln;
         while((ln = b.readLine())!=null){
             if(!ln.startsWith("#")){
-            i.addDirectory(ln);
+                i.addDirectory(ln);
             }
         }
         return i;
     }
-    
+
     /**
      * Adds a directory to the ignorelist.
      * @param pDir The directory name to add (folder name only)
@@ -70,5 +70,5 @@ public class IgnoreParser {
         b.write(pDir + "\n");
         b.close();
     }
-    
+
 }
