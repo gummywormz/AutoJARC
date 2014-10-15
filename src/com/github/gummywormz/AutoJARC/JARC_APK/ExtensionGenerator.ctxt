@@ -1,8 +1,0 @@
-#BlueJ class context
-comment0.params=pkgName\ apk\ app
-comment0.target=ExtensionGenerator(java.lang.String,\ java.io.File,\ java.lang.String)
-comment0.text=\r\n\ Creates\ a\ new\ extension\ generator\ object\r\n\ @param\ pkgName\ The\ name\ of\ the\ package\r\n\ @param\ apk\ Path\ to\ the\ APK\ file\r\n\ @param\ app\ Application\ name\ \r\n
-comment1.params=path
-comment1.target=void\ generate(java.io.File)
-comment1.text=\r\n\ Generates\ the\ extension\ folder\r\n\ @param\ path\ The\ path\ to\ create\ the\ file\r\n
-numComments=2

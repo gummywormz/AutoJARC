@@ -1,8 +1,0 @@
-#BlueJ class context
-comment0.params=
-comment0.target=com.github.gummywormz.AutoJARC.User.IgnoreList\ getIgnoreList()
-comment0.text=\r\n\ Gets\ the\ IgnoreList\ from\ autojarc.ignore\r\n\ @return\ The\ IgnoreList\ object\ based\ on\ autojarc.ignore\r\n\ @throws\ FileNotFoundException\r\n\ @throws\ IOException\r\n
-comment1.params=pDir
-comment1.target=void\ appendIgnoreList(java.lang.String)
-comment1.text=\r\n\ Adds\ a\ directory\ to\ the\ ignorelist.\r\n\ @param\ pDir\ The\ directory\ name\ to\ add\ (folder\ name\ only)\r\n\ @throws\ IOException\r\n
-numComments=2
