@@ -56,6 +56,7 @@ public class IgnoreParser {
                 i.addDirectory(ln);
             }
         }
+        b.close();
         return i;
     }
 
