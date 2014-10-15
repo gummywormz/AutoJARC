@@ -23,7 +23,6 @@
    "import": [ {
       "id": "mfaihdlpglflfgpfjcifdjdjcckigekc"
    } ],
-   "key": "__key__",
    "manifest_version": 2,
    "name": "__MSG_extName__",
    "oauth2": {

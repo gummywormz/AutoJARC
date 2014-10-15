@@ -34,12 +34,12 @@ public class GetFoldersWorker extends javax.swing.SwingWorker<ArrayList<Project>
             String apk = test.getAbsolutePath()+ ExtensionGenerator.sep + "bin" + ExtensionGenerator.sep + d.getApkName();
             String pkg = new AndroidApk(new File(apk)).getPackageName();
             String hash = GetHash.getHash(new File(apk));
-            boolean hasExt = new File(AutoJARCUI.getExtensionDir()).exists();
+            boolean hasExt = new File(AutoJARCUI.getExtensionDir() + ExtensionGenerator.sep + pkg).exists();
             Project p = new Project(pkg,test.getName(),hash,d.getApkName(),hasExt);
             projs.add(p);
             publish("Added " + test.getAbsolutePath());
             }else{
-            publish("Not adding " + test.getAbsolutePath() + "because: " + v.getReasonAsMessage());
+            publish("Not adding " + test.getAbsolutePath() + " because: " + v.getReasonAsMessage());
         }
         }
         return projs;

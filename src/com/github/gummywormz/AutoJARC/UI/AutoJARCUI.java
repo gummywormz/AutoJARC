@@ -25,6 +25,8 @@
 package com.github.gummywormz.AutoJARC.UI;
 
 import com.github.gummywormz.AutoJARC.Background.GetFoldersWorker;
+import com.github.gummywormz.AutoJARC.Background.GetHash;
+import com.github.gummywormz.AutoJARC.Background.IgnoreParser;
 import com.github.gummywormz.AutoJARC.Background.ProjectParser;
 import com.github.gummywormz.AutoJARC.JARC_APK.ExtensionGenerator;
 import com.github.gummywormz.AutoJARC.User.*;
@@ -32,8 +34,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
@@ -82,7 +82,7 @@ public class AutoJARCUI extends javax.swing.JFrame {
     File ignore = new File(workDir + sep + "autojarc.ignore");
     File projects = new File(workDir + sep + "autojarc.projects");
     if(!ignore.exists()){
-        InputStream ignoreStream = AutoJARCUI.class.getClassLoader().getResourceAsStream("com/github/gummywormz/AutoJARC/res/ConfigFile/autojarc.ignore");
+        InputStream ignoreStream = AutoJARCUI.class.getClassLoader().getResourceAsStream("com/github/gummywormz/AutoJARC/res/ConfigFiles/autojarc.ignore");
         OutputStream out = new FileOutputStream(ignore.getAbsolutePath());
         byte[] buf = new byte[1024];
         int len;
@@ -91,9 +91,9 @@ public class AutoJARCUI extends javax.swing.JFrame {
              }
         out.close();
         ignoreStream.close();
-    }
+    }else{ignoreList  = IgnoreParser.getIgnoreList();}
     if(!projects.exists()){
-        InputStream projectsStream = AutoJARCUI.class.getClassLoader().getResourceAsStream("com/github/gummywormz/AutoJARC/res/ConfigFile/autojarc.projects");
+        InputStream projectsStream = AutoJARCUI.class.getClassLoader().getResourceAsStream("com/github/gummywormz/AutoJARC/res/ConfigFiles/autojarc.projects");
         OutputStream out = new FileOutputStream(projects.getAbsolutePath());
         byte[] buf = new byte[1024];
         int len;
@@ -104,7 +104,7 @@ public class AutoJARCUI extends javax.swing.JFrame {
         projectsStream.close();
     }else{projectList = new ArrayList<>(ProjectParser.getProjects());repaintTable();}
     if(!config.exists()){
-        InputStream configStream = AutoJARCUI.class.getClassLoader().getResourceAsStream("com/github/gummywormz/AutoJARC/res/ConfigFile/autojarc.conf");
+        InputStream configStream = AutoJARCUI.class.getClassLoader().getResourceAsStream("com/github/gummywormz/AutoJARC/res/ConfigFiles/autojarc.conf");
         OutputStream out = new FileOutputStream(config.getAbsolutePath());
         byte[] buf = new byte[1024];
         int len;
@@ -374,10 +374,7 @@ public class AutoJARCUI extends javax.swing.JFrame {
 
         projectTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Project", "Extension Directory"
@@ -616,12 +613,72 @@ public class AutoJARCUI extends javax.swing.JFrame {
     }//GEN-LAST:event_ignoreBtnActionPerformed
 
     private void launchProjectBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_launchProjectBtnActionPerformed
-        int row = projectTable.getSelectedRow();
-        if(row<0){throwError("Please select a project to launch!");return;}
-        Project p = projectList.get(row);
+        int row;
+        try{row = projectTable.getSelectedRow();}catch (java.lang.ArrayIndexOutOfBoundsException w){throwError("Please select a project to launch!");return;}
+        Project p = projectList.get(row-1);
+        File apkPath = new File(configuration.getWorkSpace() + sep + p.getAppName() + sep + "bin" + sep + p.getApkName());
+        File replaceApk = new File(configuration.getExtensionDirectory() + sep + p.getPackageName() + sep + "vendor" + sep + "chromium" + sep + "crx" + sep + p.getApkName());
+        if(!p.hasExtensionDirectory()){
+        ExtensionGenerator x = new ExtensionGenerator(p.getPackageName(),apkPath,p.getAppName());
+        x.generate(configuration.getExtensionDirAsFile());
+        p.setExtensionDir(true);
+        projectList.set(row-1, p);
+        repaintTable();
+        }else try {
+            if(!p.verifyHash(GetHash.getHash(replaceApk))){
+            
+            copyFile(apkPath,replaceApk);
+            console.append("DEBUG(trying to replace this apk): " + replaceApk.getAbsolutePath());
+            }
+        } catch (IOException ex) {
+            throwError("Could not access the apk file for verification / transfer of updates. Make sure you have access to it.");
+        }
         
+        String chromePathReal;
+        if(configuration.getChromePath().endsWith(".app")){
+            String isCanary;
+            if(configuration.getChromePath().contains("Canary")){
+                isCanary = " Canary";
+            }
+            else{
+                isCanary = "";
+            }
+            chromePathReal = configuration.getChromePath() + "/Contents/Mac OS/Google Chrome" + isCanary;
+        }else{chromePathReal = configuration.getChromePath();}
+        console.append("DEBUG(trying to launch this chrome path): " + chromePathReal);
+        try {
+            String launch = "--load-and-launch-app=" + configuration.getExtensionDirectory() + sep + p.getPackageName();
+            Process chrome = new ProcessBuilder(chromePathReal,launch).start();
+        } catch (IOException ex) {
+            console.append(ex.getMessage());
+            throwError("Your chrome path is invalid!");
+        }
     }//GEN-LAST:event_launchProjectBtnActionPerformed
 
+    
+    private void copyFile(File input, File output){
+//really dirty hack
+        InputStream inStream = null;
+        OutputStream outStream = null;
+        try{
+ 
+            inStream = new FileInputStream(input);
+            outStream = new FileOutputStream(output);
+ 
+            byte[] buffer = new byte[1024];
+ 
+            int length;
+            while ((length = inStream.read(buffer)) > 0){
+                outStream.write(buffer, 0, length);
+            }
+ 
+            inStream.close();
+            outStream.close();
+ 
+        }catch(IOException e){
+            throwError("Could not access the apk file for verification / transfer of updates. Make sure you have access to it.");
+        }
+}
     private void updateConfig(String ws, String cp, String ed){
     configuration = new Configuration(ws,cp,ed);
     }
