@@ -30,13 +30,20 @@ import com.github.gummywormz.AutoJARC.Background.IgnoreParser;
 import com.github.gummywormz.AutoJARC.Background.ProjectParser;
 import com.github.gummywormz.AutoJARC.JARC_APK.ExtensionGenerator;
 import com.github.gummywormz.AutoJARC.User.*;
+import java.awt.Desktop;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.*;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JTextArea;
+import javax.swing.event.HyperlinkEvent;
+import javax.swing.event.HyperlinkListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.html.HTMLEditorKit;
 
 /**
  * Main window of AutoJARC
@@ -76,6 +83,11 @@ public class AutoJARCUI extends javax.swing.JFrame {
     return console;
     }
     
+    /**
+     * Checks the autojarc.* files to see if they exist. If they do, load them into the objects. Otherwise, output the default files.
+     * @throws FileNotFoundException
+     * @throws IOException 
+     */
     private void checkFiles() throws FileNotFoundException, IOException{
 
     File config = new File(workDir + sep + "autojarc.conf");
@@ -149,9 +161,9 @@ public class AutoJARCUI extends javax.swing.JFrame {
         aboutWindow = new javax.swing.JFrame();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        aboutText = new javax.swing.JTextPane();
         jButton2 = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        aboutHTML = new javax.swing.JEditorPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         console = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
@@ -165,7 +177,11 @@ public class AutoJARCUI extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
+        configWindow.setTitle("AutoJARC - Configuration");
+        configWindow.setResizable(false);
+
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Configuration");
 
         wsTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -225,7 +241,7 @@ public class AutoJARCUI extends javax.swing.JFrame {
                             .addComponent(jLabel7))
                         .addGap(18, 18, 18)
                         .addGroup(configWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(wsTextField)
+                            .addComponent(wsTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
                             .addComponent(extDirTextField, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(chromeTextField, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(18, 18, 18)
@@ -235,9 +251,9 @@ public class AutoJARCUI extends javax.swing.JFrame {
                             .addComponent(workspaceBrowse, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, configWindowLayout.createSequentialGroup()
-                .addContainerGap(132, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
-                .addGap(118, 118, 118))
+                .addGap(113, 113, 113))
         );
         configWindowLayout.setVerticalGroup(
             configWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -275,6 +291,7 @@ public class AutoJARCUI extends javax.swing.JFrame {
 
         errorDia.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         errorDia.setTitle("AutoJARC - Error!");
+        errorDia.setResizable(false);
 
         errorText.setText("jLabel8");
 
@@ -310,15 +327,12 @@ public class AutoJARCUI extends javax.swing.JFrame {
 
         aboutWindow.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         aboutWindow.setTitle("AutoJARC - About");
+        aboutWindow.setResizable(false);
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel9.setText("AutoJARC");
 
         jLabel10.setText("Automatic Chrome Extension Builder for Android SDK Projects");
-
-        aboutText.setContentType("text/html"); // NOI18N
-        aboutText.setText("<html>\r\n  <head>\r\n\r\n  </head>\r\n  <body>\r\n    <p style=\"margin-top: 0\">\r\n      \rBy Paul \"Gummywormz\" Alves\n<br>\n<br>\n      <b><a href=\"https://github.com/gummywormz/AutoJARC\">Project Info / Source</a></b>\n<br>\n<br>\nThis project is licensed under a MIT license. Please see license.txt for more info.\n<br>\n<br>\nThis project uses Joakime's APK Parser Library which is available <b><a href = \"https://github.com/joakime/android-apk-parser\">here.</b></a>\n<br>\nLicense info for the library is available in License-android-apk-parser.txt.\n<br>\n<br>\nAdditional information about this project is available in the supplied README.md\n<br>\n<br>\nSpecial thanks to Google for the initial Android Shim and <a href = \"https://github.com/vladikoff\"><b>Vlad Filippov for the Chrome Browser port.</b></a>\n    </p>\r\n  </body>\r\n</html>\r\n");
-        jScrollPane4.setViewportView(aboutText);
 
         jButton2.setText("OK");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -326,6 +340,11 @@ public class AutoJARCUI extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
+
+        aboutHTML.setEditable(false);
+        aboutHTML.setEditorKit(new HTMLEditorKit());
+        aboutHTML.setText("<html>\n <head>\n </head>\n <body>\n <p style=\"margin-top: 0\">\n\n By Paul \"Gummywormz\" Alves\n <br>\n <br>\n <b><a href=\"https://github.com/gummywormz/AutoJARC\">Project Info / Source</a></b>\n <br>\n <br>\n This project is licensed under a MIT license. Please see license.txt for more info.\n <br>\n <br>\n This project uses Joakime's APK Parser Library which is available <b><a href = \"https://github.com/joakime/android-apk-parser\">here.</b></a>\n <br>\n License info for the library is available in License-android-apk-parser.txt.\n <br>\n <br>\n Additional information about this project is available in the supplied README.md\n <br>\n <br>\n Special thanks to Google for the initial Android Shim and <a href = \"https://github.com/vladikoff\"><b>Vlad Filippov for the Chrome Browser port.</b></a>\n </p>\n </body>\n </html>");
+        jScrollPane3.setViewportView(aboutHTML);
 
         javax.swing.GroupLayout aboutWindowLayout = new javax.swing.GroupLayout(aboutWindow.getContentPane());
         aboutWindow.getContentPane().setLayout(aboutWindowLayout);
@@ -338,14 +357,16 @@ public class AutoJARCUI extends javax.swing.JFrame {
             .addGroup(aboutWindowLayout.createSequentialGroup()
                 .addGroup(aboutWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(aboutWindowLayout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(640, 640, 640)
                         .addComponent(jButton2))
                     .addGroup(aboutWindowLayout.createSequentialGroup()
                         .addGap(173, 173, 173)
                         .addComponent(jLabel10)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(aboutWindowLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3)
+                .addContainerGap())
         );
         aboutWindowLayout.setVerticalGroup(
             aboutWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -354,17 +375,16 @@ public class AutoJARCUI extends javax.swing.JFrame {
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(aboutWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(aboutWindowLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton2))
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE))
+                .addGap(5, 5, 5)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton2)
                 .addContainerGap())
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("AutoJARC");
+        setResizable(false);
 
         console.setColumns(20);
         console.setRows(5);
@@ -516,7 +536,11 @@ public class AutoJARCUI extends javax.swing.JFrame {
        configWindow.setVisible(true);
     }//GEN-LAST:event_configBtnActionPerformed
 
-    
+    /**
+     * Parses the config file
+     * @param isLaunch Set to true if this a launch scan, false otherwise.
+     * @throws FileNotFoundException 
+     */
     private void parseConfig(boolean isLaunch) throws FileNotFoundException{
     BufferedReader b = new BufferedReader(new FileReader(workDir + sep + "autojarc.conf"));
         try {
@@ -542,6 +566,20 @@ public class AutoJARCUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void aboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutActionPerformed
+        aboutHTML.addHyperlinkListener(new HyperlinkListener() {
+
+            @Override
+            public void hyperlinkUpdate(HyperlinkEvent e) {
+                 if (Desktop.isDesktopSupported() && e.getEventType()==HyperlinkEvent.EventType.ACTIVATED) {
+                try {
+                    Desktop.getDesktop().browse(e.getURL().toURI());
+                } catch (IOException | URISyntaxException e1) {
+                    throwError("It seems you can't do that...go here instead: https://github.com/gummywormz/AutoJARC");
+                }
+            }
+        }
+
+            });
         aboutWindow.pack();
         aboutWindow.setLocationRelativeTo(null);
         aboutWindow.setVisible(true);
@@ -606,9 +644,17 @@ public class AutoJARCUI extends javax.swing.JFrame {
     }//GEN-LAST:event_scanBtnActionPerformed
 
     private void ignoreBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ignoreBtnActionPerformed
-        int sel = projectTable.getSelectedRow();
-        Project dir = projectList.get(sel);
-        ignoreList.addDirectory(dir.getPackageName());
+        int sel;
+        try{sel = projectTable.getSelectedRow();} catch(java.lang.ArrayIndexOutOfBoundsException e){throwError("Please select a directory to ignore");return;}
+        Project dir = projectList.get(sel-1);
+        ignoreList.addDirectory(dir.getAppName());
+        try {
+            FileWriter fw = new FileWriter(workDir + sep + "autojarc.ignore",true);
+            fw.write("\n" + dir.getAppName());
+            fw.close();
+        } catch (IOException ex) {
+            throwError("Could not write to the ignore file");
+        }
         repaintTable();
     }//GEN-LAST:event_ignoreBtnActionPerformed
 
@@ -655,7 +701,11 @@ public class AutoJARCUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_launchProjectBtnActionPerformed
 
-    
+    /**
+     * Copies one file to another location
+     * @param input The input file
+     * @param output The output file (where to copy)
+     */
     private void copyFile(File input, File output){
 //really dirty hack
         InputStream inStream = null;
@@ -679,15 +729,25 @@ public class AutoJARCUI extends javax.swing.JFrame {
             throwError("Could not access the apk file for verification / transfer of updates. Make sure you have access to it.");
         }
 }
+    
+    /**
+     * Manually updates the configuration object
+     * @param ws Workspace Directory
+     * @param cp Path to chrome file
+     * @param ed Path to the extension directory.
+     */
     private void updateConfig(String ws, String cp, String ed){
     configuration = new Configuration(ws,cp,ed);
     }
     
+    /**
+     * Updates the JTable 
+     */
     private void repaintTable(){
-    DefaultTableModel tm = new DefaultTableModel(new String[]{"Project","ExtensionDirectory"},projectList.size());
+    DefaultTableModel tm = new DefaultTableModel(new String[]{"Project","Has Extension Directory?"},projectList.size());
     
     for(Project p : projectList){
-        if(!ignoreList.isIgnored(p.getPackageName())){
+        if(!ignoreList.isIgnored(p.getAppName())){
         String[] rowData = {p.getAppName(),Boolean.toString(p.hasExtensionDirectory())};
         tm.addRow(rowData);}
     }
@@ -759,7 +819,7 @@ public class AutoJARCUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton about;
-    private javax.swing.JTextPane aboutText;
+    private javax.swing.JEditorPane aboutHTML;
     private javax.swing.JFrame aboutWindow;
     private javax.swing.JButton chromeBrowse;
     private javax.swing.JFileChooser chromeFC;
@@ -787,7 +847,7 @@ public class AutoJARCUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JButton launchProjectBtn;
     private javax.swing.JTable projectTable;
     private javax.swing.JButton scanBtn;

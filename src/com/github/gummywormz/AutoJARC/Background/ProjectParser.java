@@ -24,7 +24,6 @@
 
 package com.github.gummywormz.AutoJARC.Background;
 
-import com.github.gummywormz.AutoJARC.JARC_APK.ExtensionGenerator;
 import com.github.gummywormz.AutoJARC.User.Project;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
