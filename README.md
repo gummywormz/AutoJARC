@@ -10,17 +10,14 @@ ANT files can only be generated via command line. Gradle support also does not a
 
 Status
 ------
-Done: 
-* Background directory worker and verifer is done (barring any bugs...).
-* ExtensionGenerator has been trimmed down to fit the project better
-* Configuration files stuff
-* Add a config file parser / writer
-* Add ignore list parser / writer
-* Add projects parser / writer
-* Add the actual scanner
+Completed!
 
+Credits
+------
+This project is licensed under a MIT license. Please see license.txt for more info.
 
-TO-DO:
+This project uses Joakime's APK Parser Library which is available [here](https://github.com/joakime/android-apk-parser)
 
-* Add the launcher code.
-* Bug test for 75 years then release.
+License info for the library is available in License-android-apk-parser.txt.
+
+Special thanks to Google for the initial Android Shim and [Vlad Filippov](https://github.com/vladikoff) for the Chrome Browser port.
