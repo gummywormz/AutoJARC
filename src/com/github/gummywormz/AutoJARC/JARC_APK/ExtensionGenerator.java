@@ -5,6 +5,7 @@
  */
 
 package com.github.gummywormz.AutoJARC.JARC_APK;
+import com.github.gummywormz.AutoJARC.UI.AutoJARCUI;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -137,10 +138,8 @@ public class ExtensionGenerator {
             icon.close();
             htmlPage.close();
             manifest.close();
-
-            //JARCUI.throwError("Operation Complete!");
         }catch(java.io.IOException e){
-            //JARCUI.throwError("Could not write some files. Make sure you have proper permissions! (If you are rebuilding a package, please delete the previous folder or save to a new one)");
+            AutoJARCUI.throwError("Could not write some files. Make sure you have proper permissions!");
         }
     }
 }

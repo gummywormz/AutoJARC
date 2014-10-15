@@ -36,8 +36,6 @@ import java.io.*;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JTextArea;
 import javax.swing.event.HyperlinkEvent;
@@ -675,7 +673,7 @@ public class AutoJARCUI extends javax.swing.JFrame {
                 if(!p.verifyHash(GetHash.getHash(replaceApk))){
 
                     copyFile(apkPath,replaceApk);
-                    console.append("DEBUG(trying to replace this apk): " + replaceApk.getAbsolutePath());
+                    console.append("DEBUG(trying to replace this apk): " + replaceApk.getAbsolutePath() + "\n");
                 }
             } catch (IOException ex) {
                 throwError("Could not access the apk file for verification / transfer of updates. Make sure you have access to it.");
@@ -692,7 +690,7 @@ public class AutoJARCUI extends javax.swing.JFrame {
             }
             chromePathReal = configuration.getChromePath() + "/Contents/Mac OS/Google Chrome" + isCanary;
         }else{chromePathReal = configuration.getChromePath();}
-        console.append("DEBUG(trying to launch this chrome path): " + chromePathReal);
+        console.append("DEBUG(trying to launch this chrome path): " + chromePathReal + "\n");
         try {
             String launch = "--load-and-launch-app=" + configuration.getExtensionDirectory() + sep + p.getPackageName();
             Process chrome = new ProcessBuilder(chromePathReal,launch).start();
