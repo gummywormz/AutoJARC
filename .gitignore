@@ -64,3 +64,4 @@ junk/
 nbproject/private/private.xml
 /build/
 /dist/
+*.ctxt
