@@ -660,14 +660,14 @@ public class AutoJARCUI extends javax.swing.JFrame {
     private void launchProjectBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_launchProjectBtnActionPerformed
         int row;
         try{row = projectTable.getSelectedRow();}catch (java.lang.ArrayIndexOutOfBoundsException w){throwError("Please select a project to launch!");return;}
-        Project p = projectList.get(row-1);
+        Project p = projectList.get(row);
         File apkPath = new File(configuration.getWorkSpace() + sep + p.getAppName() + sep + "bin" + sep + p.getApkName());
         File replaceApk = new File(configuration.getExtensionDirectory() + sep + p.getPackageName() + sep + "vendor" + sep + "chromium" + sep + "crx" + sep + p.getApkName());
         if(!p.hasExtensionDirectory()){
             ExtensionGenerator x = new ExtensionGenerator(p.getPackageName(),apkPath,p.getAppName());
             x.generate(configuration.getExtensionDirAsFile());
             p.setExtensionDir(true);
-            projectList.set(row-1, p);
+            projectList.set(row, p);
             repaintTable();
         }else try {
                 if(!p.verifyHash(GetHash.getHash(replaceApk))){
@@ -743,7 +743,7 @@ public class AutoJARCUI extends javax.swing.JFrame {
      * Updates the JTable 
      */
     private void repaintTable(){
-        DefaultTableModel tm = new DefaultTableModel(new String[]{"Project","Has Extension Directory?"},projectList.size());
+        DefaultTableModel tm = new DefaultTableModel(new String[]{"Project","Has Extension Directory?"},0);
 
         for(Project p : projectList){
             if(!ignoreList.isIgnored(p.getAppName())){
@@ -751,6 +751,7 @@ public class AutoJARCUI extends javax.swing.JFrame {
                 tm.addRow(rowData);}
         }
         projectTable.setModel(tm);
+        projectTable.repaint();
     }
 
     /**
