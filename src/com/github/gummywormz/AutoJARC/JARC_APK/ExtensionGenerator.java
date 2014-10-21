@@ -53,14 +53,14 @@ public class ExtensionGenerator {
         try{
             //write directories needed
             File baseDir = new File(absPath + sep +  pkg);
-            boolean worked = baseDir.mkdirs();
-            if(!worked){throw new java.io.IOException();}
+            baseDir.mkdirs();
+            if(!baseDir.exists()){throw new java.io.IOException();}
             File loc = new File(baseDir.getAbsolutePath() + sep + "_locales" + sep + "en");
-            worked = loc.mkdirs();
-            if(!worked){throw new java.io.IOException();}
+            loc.mkdirs();
+            if(!loc.exists()){throw new java.io.IOException();}
             File vend = new File(baseDir.getAbsolutePath() + sep + "vendor" + sep + "chromium" + sep + "crx");
-            worked = vend.mkdirs();
-            if(!worked){throw new java.io.IOException();}
+            vend.mkdirs();
+            if(!vend.exists()){throw new java.io.IOException();}
             //begin writing the internal resources
             OutputStream out = new FileOutputStream(loc.getAbsolutePath() + sep + "messages.json");
             byte[] buf = new byte[1024];

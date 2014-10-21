@@ -176,6 +176,7 @@ public class AutoJARCUI extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         configWindow.setTitle("AutoJARC - Configuration");
+        configWindow.setAlwaysOnTop(true);
         configWindow.setResizable(false);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -183,10 +184,10 @@ public class AutoJARCUI extends javax.swing.JFrame {
         jLabel4.setText("Configuration");
 
         wsTextField.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    wsTextFieldActionPerformed(evt);
-                }
-            });
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                wsTextFieldActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Workspace Directory:");
 
@@ -196,31 +197,31 @@ public class AutoJARCUI extends javax.swing.JFrame {
 
         configOK.setText("OK");
         configOK.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    configOKActionPerformed(evt);
-                }
-            });
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                configOKActionPerformed(evt);
+            }
+        });
 
         workspaceBrowse.setText("Browse");
         workspaceBrowse.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    workspaceBrowseActionPerformed(evt);
-                }
-            });
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                workspaceBrowseActionPerformed(evt);
+            }
+        });
 
         extBrowse.setText("Browse");
         extBrowse.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    extBrowseActionPerformed(evt);
-                }
-            });
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                extBrowseActionPerformed(evt);
+            }
+        });
 
         chromeBrowse.setText("Browse");
         chromeBrowse.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    chromeBrowseActionPerformed(evt);
-                }
-            });
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chromeBrowseActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout configWindowLayout = new javax.swing.GroupLayout(configWindow.getContentPane());
         configWindow.getContentPane().setLayout(configWindowLayout);
@@ -289,16 +290,17 @@ public class AutoJARCUI extends javax.swing.JFrame {
 
         errorDia.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         errorDia.setTitle("AutoJARC - Error!");
+        errorDia.setAlwaysOnTop(true);
         errorDia.setResizable(false);
 
         errorText.setText("jLabel8");
 
         errorBtn.setText("OK");
         errorBtn.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    errorBtnActionPerformed(evt);
-                }
-            });
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                errorBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout errorDiaLayout = new javax.swing.GroupLayout(errorDia.getContentPane());
         errorDia.getContentPane().setLayout(errorDiaLayout);
@@ -325,6 +327,7 @@ public class AutoJARCUI extends javax.swing.JFrame {
 
         aboutWindow.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         aboutWindow.setTitle("AutoJARC - About");
+        aboutWindow.setAlwaysOnTop(true);
         aboutWindow.setResizable(false);
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -334,10 +337,10 @@ public class AutoJARCUI extends javax.swing.JFrame {
 
         jButton2.setText("OK");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton2ActionPerformed(evt);
-                }
-            });
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         aboutHTML.setEditable(false);
         aboutHTML.setEditorKit(new HTMLEditorKit());
@@ -391,65 +394,65 @@ public class AutoJARCUI extends javax.swing.JFrame {
         jLabel1.setText("Console:");
 
         projectTable.setModel(new javax.swing.table.DefaultTableModel(
-                new Object [][] {
+            new Object [][] {
 
-                },
-                new String [] {
-                    "Project", "Extension Directory"
-                }
-            ) {
-                Class[] types = new Class [] {
-                        java.lang.String.class, java.lang.String.class
-                    };
-                boolean[] canEdit = new boolean [] {
-                        false, false
-                    };
+            },
+            new String [] {
+                "Project", "Extension Directory"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
 
-                public Class getColumnClass(int columnIndex) {
-                    return types [columnIndex];
-                }
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
-                public boolean isCellEditable(int rowIndex, int columnIndex) {
-                    return canEdit [columnIndex];
-                }
-            });
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         projectTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(projectTable);
 
         launchProjectBtn.setText("Launch");
         launchProjectBtn.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    launchProjectBtnActionPerformed(evt);
-                }
-            });
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                launchProjectBtnActionPerformed(evt);
+            }
+        });
 
         ignoreBtn.setText("Ignore");
         ignoreBtn.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    ignoreBtnActionPerformed(evt);
-                }
-            });
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ignoreBtnActionPerformed(evt);
+            }
+        });
 
         scanBtn.setText("Scan");
         scanBtn.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    scanBtnActionPerformed(evt);
-                }
-            });
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                scanBtnActionPerformed(evt);
+            }
+        });
 
         configBtn.setText("Setup");
         configBtn.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    configBtnActionPerformed(evt);
-                }
-            });
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                configBtnActionPerformed(evt);
+            }
+        });
 
         about.setText("About");
         about.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    aboutActionPerformed(evt);
-                }
-            });
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aboutActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel2.setText("Welcome to AutoJARC");
