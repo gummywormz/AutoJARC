@@ -101,6 +101,7 @@ public class AutoJARCUI extends javax.swing.JFrame {
             }
             out.close();
             ignoreStream.close();
+            ignoreList = new IgnoreList();
         }else{ignoreList  = IgnoreParser.getIgnoreList();}
         if(!projects.exists()){
             InputStream projectsStream = AutoJARCUI.class.getClassLoader().getResourceAsStream("com/github/gummywormz/AutoJARC/res/ConfigFiles/autojarc.projects");
