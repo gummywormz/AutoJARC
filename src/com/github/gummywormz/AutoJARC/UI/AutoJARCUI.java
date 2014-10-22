@@ -683,16 +683,7 @@ public class AutoJARCUI extends javax.swing.JFrame {
         }
 
         String chromePathReal;
-        if(configuration.getChromePath().endsWith(".app")){
-            String isCanary;
-            if(configuration.getChromePath().contains("Canary")){
-                isCanary = " Canary";
-            }
-            else{
-                isCanary = "";
-            }
-            chromePathReal = configuration.getChromePath() + "/Contents/Mac OS/Google Chrome" + isCanary;
-        }else{chromePathReal = configuration.getChromePath();}
+chromePathReal = configuration.getChromePath();
         console.append("DEBUG(trying to launch this chrome path): " + chromePathReal + "\n");
         try {
             String launch = "--load-and-launch-app=" + configuration.getExtensionDirectory() + sep + p.getPackageName();
