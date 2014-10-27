@@ -674,10 +674,11 @@ public class AutoJARCUI extends javax.swing.JFrame {
             projectList.set(row, p);
             repaintTable();
         }else try {
-                if(!p.verifyHash(GetHash.getHash(replaceApk))){
-
-                    copyFile(apkPath,replaceApk);
+                String binHash = GetHash.getHash(apkPath);
+                String rAPKHash = GetHash.getHash(replaceApk);
+                if(!binHash.equals(rAPKHash)){
                     console.append("DEBUG(trying to replace this apk): " + replaceApk.getAbsolutePath() + "\n");
+                    copyFile(apkPath,replaceApk);
                 }
             } catch (IOException ex) {
                 throwError("Could not access the apk file for verification / transfer of updates. Make sure you have access to it.");
