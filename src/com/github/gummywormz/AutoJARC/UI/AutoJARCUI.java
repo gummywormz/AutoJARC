@@ -184,12 +184,6 @@ public class AutoJARCUI extends javax.swing.JFrame {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Configuration");
 
-        wsTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                wsTextFieldActionPerformed(evt);
-            }
-        });
-
         jLabel5.setText("Workspace Directory:");
 
         jLabel6.setText("Extension Directory:");
@@ -198,31 +192,31 @@ public class AutoJARCUI extends javax.swing.JFrame {
 
         configOK.setText("OK");
         configOK.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                configOKActionPerformed(evt);
-            }
-        });
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    configOKActionPerformed(evt);
+                }
+            });
 
         workspaceBrowse.setText("Browse");
         workspaceBrowse.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                workspaceBrowseActionPerformed(evt);
-            }
-        });
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    workspaceBrowseActionPerformed(evt);
+                }
+            });
 
         extBrowse.setText("Browse");
         extBrowse.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                extBrowseActionPerformed(evt);
-            }
-        });
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    extBrowseActionPerformed(evt);
+                }
+            });
 
         chromeBrowse.setText("Browse");
         chromeBrowse.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chromeBrowseActionPerformed(evt);
-            }
-        });
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    chromeBrowseActionPerformed(evt);
+                }
+            });
 
         javax.swing.GroupLayout configWindowLayout = new javax.swing.GroupLayout(configWindow.getContentPane());
         configWindow.getContentPane().setLayout(configWindowLayout);
@@ -298,10 +292,10 @@ public class AutoJARCUI extends javax.swing.JFrame {
 
         errorBtn.setText("OK");
         errorBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                errorBtnActionPerformed(evt);
-            }
-        });
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    errorBtnActionPerformed(evt);
+                }
+            });
 
         javax.swing.GroupLayout errorDiaLayout = new javax.swing.GroupLayout(errorDia.getContentPane());
         errorDia.getContentPane().setLayout(errorDiaLayout);
@@ -338,10 +332,10 @@ public class AutoJARCUI extends javax.swing.JFrame {
 
         jButton2.setText("OK");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton2ActionPerformed(evt);
+                }
+            });
 
         aboutHTML.setEditable(false);
         aboutHTML.setEditorKit(new HTMLEditorKit());
@@ -395,65 +389,65 @@ public class AutoJARCUI extends javax.swing.JFrame {
         jLabel1.setText("Console:");
 
         projectTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+                new Object [][] {
 
-            },
-            new String [] {
-                "Project", "Extension Directory"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
+                },
+                new String [] {
+                    "Project", "Extension Directory"
+                }
+            ) {
+                Class[] types = new Class [] {
+                        java.lang.String.class, java.lang.String.class
+                    };
+                boolean[] canEdit = new boolean [] {
+                        false, false
+                    };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
+                public Class getColumnClass(int columnIndex) {
+                    return types [columnIndex];
+                }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return canEdit [columnIndex];
+                }
+            });
         projectTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(projectTable);
 
         launchProjectBtn.setText("Launch");
         launchProjectBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                launchProjectBtnActionPerformed(evt);
-            }
-        });
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    launchProjectBtnActionPerformed(evt);
+                }
+            });
 
         ignoreBtn.setText("Ignore");
         ignoreBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ignoreBtnActionPerformed(evt);
-            }
-        });
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    ignoreBtnActionPerformed(evt);
+                }
+            });
 
         scanBtn.setText("Scan");
         scanBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                scanBtnActionPerformed(evt);
-            }
-        });
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    scanBtnActionPerformed(evt);
+                }
+            });
 
         configBtn.setText("Setup");
         configBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                configBtnActionPerformed(evt);
-            }
-        });
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    configBtnActionPerformed(evt);
+                }
+            });
 
         about.setText("About");
         about.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                aboutActionPerformed(evt);
-            }
-        });
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    aboutActionPerformed(evt);
+                }
+            });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel2.setText("Welcome to AutoJARC");
@@ -614,7 +608,7 @@ public class AutoJARCUI extends javax.swing.JFrame {
         String wsDir = wsTextField.getText();
         String chromeDir = chromeTextField.getText();
 
-        if(extDir.isEmpty() || wsDir.isEmpty() || chromeDir.isEmpty()){throwError("Please fill in all text fields.");return;}
+        if(extDir.isEmpty() && wsDir.isEmpty() && chromeDir.isEmpty()){throwError("Please fill in all text fields.");return;}
         workspaceDirS = wsDir;
         extDirS = extDir;
         updateConfig(wsDir,chromeDir,extDir);
@@ -625,10 +619,6 @@ public class AutoJARCUI extends javax.swing.JFrame {
         }
         configWindow.dispose();
     }//GEN-LAST:event_configOKActionPerformed
-
-    private void wsTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_wsTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_wsTextFieldActionPerformed
 
     private void scanBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scanBtnActionPerformed
         GetFoldersWorker g = new GetFoldersWorker();
@@ -649,7 +639,8 @@ public class AutoJARCUI extends javax.swing.JFrame {
     private void ignoreBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ignoreBtnActionPerformed
         int sel;
         try{sel = projectTable.getSelectedRow();} catch(java.lang.ArrayIndexOutOfBoundsException e){throwError("Please select a directory to ignore");return;}
-        Project dir = projectList.get(sel-1);
+        Project dir = projectList.get(sel);
+        projectList.remove(sel);
         ignoreList.addDirectory(dir.getAppName());
         try {
             FileWriter fw = new FileWriter(workDir + sep + "autojarc.ignore",true);
@@ -685,7 +676,7 @@ public class AutoJARCUI extends javax.swing.JFrame {
         }
 
         String chromePathReal;
-chromePathReal = configuration.getChromePath();
+        chromePathReal = configuration.getChromePath();
         console.append("DEBUG(trying to launch this chrome path): " + chromePathReal + "\n");
         try {
             String launch = "--load-and-launch-app=" + configuration.getExtensionDirectory() + sep + p.getPackageName();
@@ -741,10 +732,11 @@ chromePathReal = configuration.getChromePath();
     private void repaintTable(){
         DefaultTableModel tm = new DefaultTableModel(new String[]{"Project","Has Extension Directory?"},0);
 
-        for(Project p : projectList){
+        for(int i = 0; i < projectList.size(); i++){
+            Project p = projectList.get(i);
             if(!ignoreList.isIgnored(p.getAppName())){
                 String[] rowData = {p.getAppName(),Boolean.toString(p.hasExtensionDirectory())};
-                tm.addRow(rowData);}
+                tm.addRow(rowData);}/*else{projectList.remove(i);}*/
         }
         projectTable.setModel(tm);
         projectTable.repaint();
