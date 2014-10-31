@@ -736,7 +736,7 @@ public class AutoJARCUI extends javax.swing.JFrame {
             Project p = projectList.get(i);
             if(!ignoreList.isIgnored(p.getAppName())){
                 String[] rowData = {p.getAppName(),Boolean.toString(p.hasExtensionDirectory())};
-                tm.addRow(rowData);}/*else{projectList.remove(i);}*/
+                tm.addRow(rowData);}
         }
         projectTable.setModel(tm);
         projectTable.repaint();
