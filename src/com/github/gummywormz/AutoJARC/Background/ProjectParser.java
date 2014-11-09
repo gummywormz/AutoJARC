@@ -24,6 +24,7 @@
 
 package com.github.gummywormz.AutoJARC.Background;
 
+import com.github.gummywormz.AutoJARC.User.IgnoreList;
 import com.github.gummywormz.AutoJARC.User.Project;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -72,6 +73,23 @@ public class ProjectParser {
         }
         w.close();
 
+    }
+    
+    /**
+     * Removes ignored entries from a project list
+     * @param projectList The list of projects to remove ignored entries from
+     * @param ignoreList The ignorelist object to compare to
+     * @return A project list without ignored entries
+     */
+    public static ArrayList<Project> removeIgnored(ArrayList<Project> projectList, IgnoreList ignoreList)
+    {
+    for(int i = 0; i < projectList.size(); i++){
+            Project p = projectList.get(i);
+            if(ignoreList.isIgnored(p.getAppName())){
+                projectList.remove(i);
+            }
+        }
+    return projectList;
     }
 
     /**

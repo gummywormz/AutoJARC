@@ -50,7 +50,7 @@ import javax.swing.text.html.HTMLEditorKit;
 public class AutoJARCUI extends javax.swing.JFrame {
 
     private final String workDir;
-    private ArrayList<Project> projectList;
+    private static ArrayList<Project> projectList;
     private Configuration configuration;
     private static IgnoreList ignoreList;
     private final String sep = ExtensionGenerator.sep;
@@ -731,13 +731,13 @@ public class AutoJARCUI extends javax.swing.JFrame {
      */
     private void repaintTable(){
         DefaultTableModel tm = new DefaultTableModel(new String[]{"Project","Has Extension Directory?"},0);
-
-        for(int i = 0; i < projectList.size(); i++){
-            Project p = projectList.get(i);
-            if(!ignoreList.isIgnored(p.getAppName())){
-                String[] rowData = {p.getAppName(),Boolean.toString(p.hasExtensionDirectory())};
-                tm.addRow(rowData);}
+        projectList = new ArrayList<>(ProjectParser.removeIgnored(projectList, ignoreList));
+        
+        for(Project p : projectList){
+            String[] rowData = {p.getAppName(),Boolean.toString(p.hasExtensionDirectory())};
+            tm.addRow(rowData);
         }
+        
         projectTable.setModel(tm);
         projectTable.repaint();
     }
