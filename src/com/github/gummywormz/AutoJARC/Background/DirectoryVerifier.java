@@ -24,7 +24,7 @@
 
 package com.github.gummywormz.AutoJARC.Background;
 
-import com.github.gummywormz.AutoJARC.JARC_APK.ExtensionGenerator;
+import com.github.gummywormz.AutoJARC.APKUtils.ExtensionGenerator;
 import java.io.File;
 
 /**

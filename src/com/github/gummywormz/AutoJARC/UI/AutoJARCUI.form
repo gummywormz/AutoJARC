@@ -24,18 +24,21 @@
                               <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="wsTextField" pref="144" max="32767" attributes="0"/>
                               <Component id="extDirTextField" alignment="1" max="32767" attributes="0"/>
                               <Component id="chromeTextField" alignment="1" max="32767" attributes="0"/>
+                              <Component id="sdkField" alignment="1" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="chromeBrowse" alignment="1" min="-2" max="-2" attributes="0"/>
                               <Component id="extBrowse" alignment="1" min="-2" max="-2" attributes="0"/>
                               <Component id="workspaceBrowse" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="sdkBrowse" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -72,6 +75,12 @@
                       <Component id="chromeBrowse" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="sdkField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="sdkBrowse" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="configOK" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -89,9 +98,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="wsTextField">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="wsTextFieldActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="extDirTextField">
         </Component>
@@ -143,6 +149,21 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chromeBrowseActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JTextField" name="sdkField">
+        </Component>
+        <Component class="javax.swing.JButton" name="sdkBrowse">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Browse"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sdkBrowseActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel8">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="SDK Path:"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
@@ -317,6 +338,13 @@
         </Container>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JFileChooser" name="sdkFC">
+      <Properties>
+        <Property name="approveButtonText" type="java.lang.String" value="Open"/>
+        <Property name="dialogTitle" type="java.lang.String" value="AutoJARC - SDK Directory"/>
+        <Property name="fileSelectionMode" type="int" value="1"/>
+      </Properties>
+    </Component>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
@@ -427,9 +455,6 @@
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
           </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
-          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

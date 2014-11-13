@@ -1,11 +1,14 @@
 package com.github.gummywormz.AutoJARC.Background;
 
-import com.github.gummywormz.AutoJARC.JARC_APK.ExtensionGenerator;
+import com.github.gummywormz.AutoJARC.APKUtils.ExtensionGenerator;
 import com.github.gummywormz.AutoJARC.UI.AutoJARCUI;
 import com.github.gummywormz.AutoJARC.User.Project;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JTextArea;
 import net.erdfelt.android.apk.AndroidApk;
 
@@ -18,6 +21,12 @@ public class GetFoldersWorker extends javax.swing.SwingWorker<ArrayList<Project>
 {
 
     private JTextArea console = null;
+    private AutoJARCUI gui;
+    
+    public GetFoldersWorker(AutoJARCUI win)
+    {
+     gui = win;
+    }
 
     @Override
     protected ArrayList<Project> doInBackground() throws Exception {
@@ -46,9 +55,20 @@ public class GetFoldersWorker extends javax.swing.SwingWorker<ArrayList<Project>
 
     @Override
     protected void process(List< String> chunks){
-        console = AutoJARCUI.getConsole();
+        console = gui.getConsole();
         for (final String string : chunks) {
             console.append(string + "\n");
         }
     }
-}
+    
+    @Override
+    protected void done()
+    {
+        try {
+            gui.pushProjects(this.get());
+        } catch (InterruptedException | ExecutionException ex) {
+            AutoJARCUI.throwError("Scan Failed because: " + ex.getLocalizedMessage());
+        }
+    }
+    }
+

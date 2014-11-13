@@ -24,7 +24,7 @@
 
 package com.github.gummywormz.AutoJARC.User;
 
-import com.github.gummywormz.AutoJARC.JARC_APK.ExtensionGenerator;
+import com.github.gummywormz.AutoJARC.APKUtils.ExtensionGenerator;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -38,17 +38,20 @@ public class Configuration {
     private String workspaceDir;
     private String chromePath;
     private String extensionDir;
+    private String sdkDir;
 
     /**
      * Creates a new configuration object NOTE: all paths are to be absolute
      * @param ws Directory to the user's workspace
      * @param cp Path to the Chrome executable (including the file itself)
      * @param ed Path to the extension directory
+     * @param sdk Path to the user's android SDK (the folder called sdk...)
      */
-    public Configuration(String ws, String cp,String ed){
+    public Configuration(String ws, String cp,String ed, String sdk){
         workspaceDir = ws;
         chromePath = cp;
         extensionDir = ed;
+        sdkDir = sdk;
     }
 
     /**
@@ -98,6 +101,15 @@ public class Configuration {
     public String getExtensionDirectory(){
         return extensionDir;
     }
+    
+    /**
+     * Returns the SDK path as a String
+     * @return the SDK path as a String
+     */
+    public String getSDK() {
+       return sdkDir;
+    }
+
 
     /**
      * Returns the workspace directory as a File
@@ -122,6 +134,14 @@ public class Configuration {
     public File getExtensionDirAsFile(){
         return new File(extensionDir);
     }
+    
+    /**
+     * Returns the SDK path as a File
+     * @return the SDK path as a File
+     */
+    public File getSDKAsFile(){
+        return new File(sdkDir);
+    }
 
     /**
      * Outputs this configuration as an autojarc.conf file
@@ -129,10 +149,11 @@ public class Configuration {
      */
     public void output() throws java.io.IOException {
         String curPath = System.getProperty("user.dir");
-        String[] lines = new String[3];
+        String[] lines = new String[4];
         lines[0] = "WORKSPACE_PATH=" + this.getWorkSpace();
         lines[1] = "CHROME_PATH=" + this.getChromePath();
         lines[2] = "EXTENSION_DIRECTORY=" + this.getExtensionDirectory();
+        lines[3] = "SDK_PATH=" + this.getSDK();
         String sep = ExtensionGenerator.sep;
         BufferedWriter w = new BufferedWriter(new FileWriter(curPath + sep + "autojarc.conf"));
         for(String s : lines){
@@ -140,5 +161,4 @@ public class Configuration {
         }
         w.close();
     }
-
 }
