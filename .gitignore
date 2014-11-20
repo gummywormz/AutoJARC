@@ -61,9 +61,7 @@ $RECYCLE.BIN/
 
 #Junk
 junk/
-nbproject/private/private.xml
+nbproject/private/
 /build/
 /dist/
 *.ctxt
-nbproject/private/private.xml
-nbproject/private/private.xml
