@@ -1,6 +1,8 @@
 AutoJARC
 ========
 
+**NOTE:** This project is deprecated in favor of [apkizer](https://github.com/gummywormz/apkizer) and [JARC-APK](https://github.com/gummywormz/JARC-APK)
+
 Auto-JARC is an automatic ARC extension builder for use with ADT / Eclipse based on my previous [JARC-APK application.](https://github.com/gummywormz/JARC-APK)
 
 Why not use a build script?
